@@ -1,20 +1,32 @@
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Dimensions, TextInput, TouchableOpacity, FlatList, Platform } from 'react-native'
-import React, {useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
 import { BellIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
 import {themeColors} from '../theme';
 import {categoryData, bookItems} from '../constants';
 import Carousel from 'react-native-snap-carousel';
-import BookCard from '../components/BookCard';
-
+import Categories from '../components/Categories'
+//import BookCard from '../components/BookCard';
+import axios from 'axios';
+import Books from '../components/Books';
 
 const {width, height} = Dimensions.get('window');
 const ios = Platform.OS == 'ios';
 
 export default function HomeScreen() {
+  //const [activeCategory, setActiveCategory] = useState('Category 1');
+  const [filteredBooks, setFilteredBooks] = useState(bookItems);
+  const [selectedCategory, setSelectedCategory] = useState('Category 1');
 
-  const [activeCategory, setActiveCategory] = useState(1);
+
+  useEffect(() => {
+    // Filter the books based on the selected category
+    const filtered = bookItems.filter((book) => book.category === selectedCategory);
+    setFilteredBooks(filtered);
+  }, [selectedCategory]);
+
+  
 
   return (
     <View className="flex-1 relative bg-white">
@@ -49,55 +61,26 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* categories */}
-        <View className="px-5 mt-6">
-          <FlatList 
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={categoryData}
-            keyExtractor={item=> item.id}
-            className="overflow-visible"
-            renderItem={({item})=>{
-              let isActive = item.id==activeCategory;
-              let activeTextClass = isActive? 'text-white': 'text-gray-700';
-              return (
-                <TouchableOpacity 
-                  onPress={()=> setActiveCategory(item.id)}
-                  style={{backgroundColor:  isActive? themeColors.bgLight: 'rgba(0,0,0,0.07)'}} 
-                  className="p-2 px-5 mr-2 rounded-full shadow"
-                >
-                  <Text className={"font-semibold" + activeTextClass}>
-                    {item.title}
-                  </Text>
-                </TouchableOpacity>
-              )
-              }}
-            />
-
-        </View>
-
-      
-
-      {/* book cards */}
-      <View className={`overflow-visible flex justify-center flex-1}`}>
-        <View className="mt-16 py-2">
-          <Carousel
-            containerCustomStyle={{overflow: 'visible'}}
-            data={bookItems}
-            renderItem={({item})=> <BookCard item={item} />}
-            firstItem={1}
-            loop={true}
-            inactiveSlideScale={0.75}     // opacity of interactive slides
-            inactiveSlideOpacity={0.75}   // size of interactive slides
-            sliderWidth={width}    // actal slide width
-            itemWidth={width*0.63}  // card width
-            slideStyle={{display: 'flex', alignItems: 'center'}}
-          />
-        </View>
         
-      </View>
-      </SafeAreaView>
 
+
+        {/* categories */}
+        <View>  
+          <Categories activeCategory={selectedCategory} setActiveCategory={setSelectedCategory}/>
+        </View>
+        <Books books={filteredBooks} />
+      {/*
+      <FlatList
+        data={filteredBooks}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          // Render your book item here
+          <View>
+            <Text>{item.title}</Text>
+          </View>
+        )}
+        />*/}
+    </SafeAreaView>
     </View>
-  )
+  );
 }

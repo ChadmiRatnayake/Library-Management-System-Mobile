@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
+import { View, Text, ScrollView, TouchableOpacity, Image, FlatList } from 'react-native'
+import React from 'react';
+import { categoryData } from '../constants';
+import {themeColors} from '../theme';
 
-export default function Categories(){
+
+export default function Categories({selectedCategory, setActiveCategory}){
     return (
         <View className="px-5 mt-6">
         <FlatList 
@@ -10,7 +14,7 @@ export default function Categories(){
           keyExtractor={item=> item.id}
           className="overflow-visible"
           renderItem={({item})=>{
-            let isActive = item.id==activeCategory;
+            let isActive = item.id==selectedCategory;
             let activeTextClass = isActive? 'text-white': 'text-gray-700';
             return (
               <TouchableOpacity 
