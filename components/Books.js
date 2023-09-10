@@ -1,90 +1,83 @@
-/*import { View, Text, Pressable, Image } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ScrollView, ImageBackground } from 'react-native'
 import React from 'react'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import MasonryList from '@react-native-seoul/masonry-list';
-import { bookItems, mealData } from '../constants';
-import Animated, { FadeInDown } from 'react-native-reanimated';
-import Loading from './loading';
-import { CachedImage } from '../helpers/image';
-import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { ArrowLeftIcon } from 'react-native-heroicons/solid'
+import { useNavigation } from '@react-navigation/native'
+import { themeColors } from '../theme'
 
-export default function Books({categories, books}) {
-    const navigation = useNavigation();
+const Book1 = require('../assets/images/charlieChocoFac.jpg');
+const Book2 = require('../assets/images/paddington.jpg');
+
+export default function Books() {
+  const navigation = useNavigation();
+
   return (
-    <View className="mx-4 space-y-3">
-      <Text style={{fontSize: hp(3)}} className="font-semibold text-neutral-600">Books</Text>
-      <View>
-        {
-            categories.length==0 || books.length==0?(
-                <Loading size="large" className="mt-20" />
-            ): (
-                <MasonryList
-                    data={bookItems}
-                    keyExtractor={(item) => item.id}
-                    numColumns={2}
-                    showsVerticalScrollIndicator={false}
-                    renderItem={({item, i}) => <BookCard item={item} index={i} navigation={navigation} />}
-                    // refreshing={isLoadingNext}
-                    // onRefresh={() => refetch({first: ITEM_CNT})}
-                    onEndReachedThreshold={0.1}
-                    // onEndReached={() => loadNext(ITEM_CNT)}
-                />
-            )
-        }
-            
+    <View className="flex-1 bg-white">
+      <ScrollView className="flex-1">
+        <SafeAreaView className="flex-1">
+
+          <Text className="text-2xl font-bold tracking-tight text-gray-900 ml-8">
+            All Books
+          </Text>
+
+          <View className="form space-y-2 justify-center items-center">
+            {/*
+              Group books in pairs and wrap them in a row (flexDirection: 'row')
+              to display them in two columns.
+            */}
+            <View className="flex-row">
+              <TouchableOpacity className="py-3 bg-white w-36 rounded-xl">
+                <View className="flex-row justify-center">
+                  <Image source={Book1}
+                    style={{ width: 150, height: 250 }} />
+                </View>
+                <Text className="font-xl font-bold text-center text-black">
+                  Charlie & the Chocolate Factory
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity className="py-3 bg-white w-36 rounded-xl ml-5">
+                <View className="flex-row justify-center">
+                  <Image source={Book2}
+                    style={{ width: 150, height: 250 }} />
+                </View>
+                <Text className="font-xl font-bold text-center text-black">
+                  Paddington at the Palace
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <View className="flex-row">
+              <TouchableOpacity className="py-3 bg-white w-36 rounded-xl">
+                <View className="flex-row justify-center">
+                  <Image source={Book1}
+                    style={{ width: 150, height: 250 }} />
+                </View>
+                <Text className="font-xl font-bold text-center text-black">
+                  Charlie & the Chocolate Factory
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity className="py-3 bg-white w-36 rounded-xl ml-5">
+                <View className="flex-row justify-center">
+                  <Image source={Book2}
+                    style={{ width: 150, height: 250 }} />
+                </View>
+                <Text className="font-xl font-bold text-center text-black">
+                  Paddington at the Palace
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+        </SafeAreaView>
+      </ScrollView>
+
+      <View className="flex-row justify-center m-7 ">
+        <Text className=" font-semibold">Already have an account?</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Text className="font-semibold text-[#3da749] "> Login</Text>
+        </TouchableOpacity>
       </View>
+
     </View>
   )
-}
-
-const BookCard = ({item, index, navigation})=>{
-    let isEven = index%2==0;
-    return (
-        <Animated.View entering={FadeInDown.delay(index*100).duration(600).springify().damping(12)}>
-            <Pressable
-                style={{width: '100%', paddingLeft: isEven? 0:8, paddingRight: isEven?8:0}}
-                className="flex justify-center mb-4 space-y-1"
-                onPress={()=> navigation.navigate('BookDetail', {...item})}
-            >
-                 <Image 
-                    source={{uri: item.strMealThumb}}
-                    style={{width: '100%', height: index%3==0? hp(25): hp(35), borderRadius: 35}}
-                    className="bg-black/5"
-                /> 
-                {/*<CachedImage
-                     uri= {item.strMealThumb}
-                     style={{width: '100%', height: index%3==0? hp(25): hp(35), borderRadius: 35}}
-                     className="bg-black/5"
-                     sharedTransitionTag={item.strMeal}
-    />*/
-/*                <Text style={{fontSize: hp(1.5)}} className="font-semibold ml-2 text-neutral-600">
-                    {
-                        item.strMeal.length>20? item.strMeal.slice(0,20)+'...': item.strMeal
-                    }
-                </Text>
-            </Pressable>
-        </Animated.View>
-    )
-}
-*/
-
-import React from 'react';
-import { View, Text, FlatList } from 'react-native';
-
-export default function Books({ books }) {
-  return (
-    <View>
-      <Text>Library</Text>
-      <FlatList
-        data={books}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          // Render your book item here
-          <View>
-            <Text>{item.title}</Text>
-          </View>
-        )}
-      />
-    </View>
-  );
 }

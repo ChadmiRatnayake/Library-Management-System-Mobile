@@ -10,6 +10,10 @@ import Categories from '../components/Categories'
 //import BookCard from '../components/BookCard';
 import axios from 'axios';
 import Books from '../components/Books';
+import { useNavigation } from '@react-navigation/native'
+
+
+
 
 const {width, height} = Dimensions.get('window');
 const ios = Platform.OS == 'ios';
@@ -19,6 +23,7 @@ export default function HomeScreen() {
   const [filteredBooks, setFilteredBooks] = useState(bookItems);
   const [selectedCategory, setSelectedCategory] = useState('Category 1');
 
+  const navigation = useNavigation();
 
   useEffect(() => {
     // Filter the books based on the selected category
@@ -40,13 +45,13 @@ export default function HomeScreen() {
 
       <SafeAreaView className="flex-1">
         {/* avatar and bell icon */}
-        <View className="mx-4 flex-row justify-between items-center">
-          <Image source={require('../assets/images/avatar.png')} 
-            className="h-9 w-9 rounded-full" />
-          
-          <View className="flex-row justify-between items-center">
-            <BellIcon size="27" color="black" />
-          </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 16 }}>
+          <TouchableOpacity onPress={()=> navigation.navigate('UserProfile')}>
+            <Image source={require('../assets/images/avatar.png')} style={{ width: 36, height: 36, borderRadius: 18 }} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <BellIcon size={27} color="black" />
+          </TouchableOpacity>
         </View>
 
         {/* search bar */}
@@ -68,8 +73,9 @@ export default function HomeScreen() {
         <View>  
           <Categories activeCategory={selectedCategory} setActiveCategory={setSelectedCategory}/>
         </View>
-        <Books books={filteredBooks} />
-      {/*
+        <Books />
+        
+      {/* <Books books={filteredBooks} />
       <FlatList
         data={filteredBooks}
         keyExtractor={(item) => item.id}
@@ -80,6 +86,10 @@ export default function HomeScreen() {
           </View>
         )}
         />*/}
+
+          
+
+
     </SafeAreaView>
     </View>
   );
