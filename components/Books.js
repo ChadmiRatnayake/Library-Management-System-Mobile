@@ -1,90 +1,111 @@
-/*import { View, Text, Pressable, Image } from 'react-native'
-import React from 'react'
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import MasonryList from '@react-native-seoul/masonry-list';
-import { bookItems, mealData } from '../constants';
-import Animated, { FadeInDown } from 'react-native-reanimated';
-import Loading from './loading';
-import { CachedImage } from '../helpers/image';
-import { useNavigation } from '@react-navigation/native';
-
-export default function Books({categories, books}) {
-    const navigation = useNavigation();
-  return (
-    <View className="mx-4 space-y-3">
-      <Text style={{fontSize: hp(3)}} className="font-semibold text-neutral-600">Books</Text>
-      <View>
-        {
-            categories.length==0 || books.length==0?(
-                <Loading size="large" className="mt-20" />
-            ): (
-                <MasonryList
-                    data={bookItems}
-                    keyExtractor={(item) => item.id}
-                    numColumns={2}
-                    showsVerticalScrollIndicator={false}
-                    renderItem={({item, i}) => <BookCard item={item} index={i} navigation={navigation} />}
-                    // refreshing={isLoadingNext}
-                    // onRefresh={() => refetch({first: ITEM_CNT})}
-                    onEndReachedThreshold={0.1}
-                    // onEndReached={() => loadNext(ITEM_CNT)}
-                />
-            )
-        }
-            
-      </View>
-    </View>
-  )
-}
-
-const BookCard = ({item, index, navigation})=>{
-    let isEven = index%2==0;
-    return (
-        <Animated.View entering={FadeInDown.delay(index*100).duration(600).springify().damping(12)}>
-            <Pressable
-                style={{width: '100%', paddingLeft: isEven? 0:8, paddingRight: isEven?8:0}}
-                className="flex justify-center mb-4 space-y-1"
-                onPress={()=> navigation.navigate('BookDetail', {...item})}
-            >
-                 <Image 
-                    source={{uri: item.strMealThumb}}
-                    style={{width: '100%', height: index%3==0? hp(25): hp(35), borderRadius: 35}}
-                    className="bg-black/5"
-                /> 
-                {/*<CachedImage
-                     uri= {item.strMealThumb}
-                     style={{width: '100%', height: index%3==0? hp(25): hp(35), borderRadius: 35}}
-                     className="bg-black/5"
-                     sharedTransitionTag={item.strMeal}
-    />*/
-/*                <Text style={{fontSize: hp(1.5)}} className="font-semibold ml-2 text-neutral-600">
-                    {
-                        item.strMeal.length>20? item.strMeal.slice(0,20)+'...': item.strMeal
-                    }
-                </Text>
-            </Pressable>
-        </Animated.View>
-    )
-}
-*/
-
 import React from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, Image, FlatList, StyleSheet, Dimensions } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { themeColors } from '../theme';
+import { categoryData, bookItems } from '../constants'; // Import dummy data
 
-export default function Books({ books }) {
+const windowWidth = Dimensions.get('window').width;
+
+export default function Books() {
+  const navigation = useNavigation();
+
+  const renderBookItem = ({ item }) => (
+    <TouchableOpacity
+      style={styles.bookItem}
+      onPress={() => navigation.navigate('BookDetails', { book: item })} // Pass book data to BookDetails screen
+    >
+      <View style={styles.bookImageContainer}>
+        <Image source={item.coverPage} style={styles.bookImage} />
+      </View>
+      <Text style={styles.bookTitle}>
+        {item.title}
+      </Text>
+    </TouchableOpacity>
+  );
+
   return (
-    <View>
-      <Text>Library</Text>
-      <FlatList
-        data={books}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          // Render your book item here
-          <View>
-            <Text>{item.title}</Text>
-          </View>
-        )}
-      />
+    <View style={styles.container}>
+      <SafeAreaView style={styles.safeAreaContainer}>
+
+        <Text style={styles.title}>
+          All Books
+        </Text>
+
+        <FlatList
+          data={bookItems}
+          keyExtractor={(item) => item.id}
+          renderItem={renderBookItem}
+          numColumns={2}
+          columnWrapperStyle={styles.columnWrapper}
+        />
+
+      </SafeAreaView>
+      <View style={styles.bottomRow}>
+        <Text style={styles.bottomText}>Already have an account?</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.loginText}>Login</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  safeAreaContainer: {
+    flex: 1,
+    padding: 16,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'gray',
+    marginBottom: 16,
+  },
+  columnWrapper: {
+    justifyContent: 'space-between',
+  },
+  bookItem: {
+    flex: 0.5, // Two items per row, so each item should take half the space
+    marginBottom: 16,
+    backgroundColor: 'white',
+    borderRadius: 16,
+    elevation: 3,
+    shadowColor: 'black',
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 2 },
+  },
+  bookImageContainer: {
+    alignItems: 'center',
+    padding: 8,
+  },
+  bookImage: {
+    width: windowWidth * 0.4, // Adjust the width as needed
+    height: 250,
+    borderRadius: 8,
+  },
+  bookTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 8,
+    marginBottom: 16,
+  },
+  bottomRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 16,
+  },
+  bottomText: {
+    fontWeight: 'bold',
+  },
+  loginText: {
+    color: '#3da749',
+    fontWeight: 'bold',
+    marginLeft: 4,
+  },
+});
