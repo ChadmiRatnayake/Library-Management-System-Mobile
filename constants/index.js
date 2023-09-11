@@ -27,30 +27,69 @@ export const categoryData = [
 export const bookItems = [
   {
     id: '1',
-    title: 'Book 1',
-    category: 'Category 1',
-    image: require('../assets/images/coffee1.png'),
-    // ... other properties
+    coverPage: require('../assets/images/charlieChocoFac.jpg'),
+    title: 'Charlie & the Chocolate Factory',
+    category: 'Fiction',
+    author: 'Author 1',
+    language: 'English',
+    abstract:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel dolor non ex vehicula tincidunt.',
+    available: true,
   },
   {
     id: '2',
-    title: 'Book 2',
-    category: 'Category 2',
-    image: require('../assets/images/coffee2.png'),
-    // ... other properties
+    coverPage: require('../assets/images/paddington.jpg'),
+    title: 'Paddington at the Palace',
+    category: 'Science',
+    author: 'Author 2',
+    language: 'English',
+    abstract:
+      'Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.',
+    available: true,
   },
   {
     id: '3',
-    title: 'Book 3',
-    category: 'Category 3',
-    image: require('../assets/images/coffee3.png'),
-    // ... other properties
+    coverPage: require('../assets/images/charlieChocoFac.jpg'),
+    title: 'Book 1',
+    category: 'Fiction',
+    author: 'Author 1',
+    language: 'English',
+    abstract:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel dolor non ex vehicula tincidunt.',
+    available: false,
   },
   {
     id: '4',
-    title: 'Book 4',
-    category: 'Category 1',
-    // ... other properties
+    coverPage: require('../assets/images/paddington.jpg'),
+    title: 'Book 2',
+    category: 'Science',
+    author: 'Author 2',
+    language: 'English',
+    abstract:
+      'Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.',
+    available: true,
+  },
+  {
+    id: '5',
+    coverPage: require('../assets/images/charlieChocoFac.jpg'),
+    title: 'Book 1',
+    category: 'Fiction',
+    author: 'Author 1',
+    language: 'English',
+    abstract:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel dolor non ex vehicula tincidunt.',
+    available: true,
+  },
+  {
+    id: '6',
+    coverPage: require('../assets/images/paddington.jpg'),
+    title: 'Book 2',
+    category: 'Science',
+    author: 'Author 2',
+    language: 'English',
+    abstract:
+      'Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.',
+    available: true,
   },
 
 ]

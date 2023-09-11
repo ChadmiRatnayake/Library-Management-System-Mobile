@@ -14,7 +14,6 @@ import { useNavigation } from '@react-navigation/native'
 
 
 
-
 const {width, height} = Dimensions.get('window');
 const ios = Platform.OS == 'ios';
 
@@ -73,7 +72,8 @@ export default function HomeScreen() {
         <View>  
           <Categories activeCategory={selectedCategory} setActiveCategory={setSelectedCategory}/>
         </View>
-        <Books />
+        <Books/>
+        
         
       {/* <Books books={filteredBooks} />
       <FlatList
