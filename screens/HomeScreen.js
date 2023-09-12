@@ -15,7 +15,7 @@ import { useNavigation } from '@react-navigation/native'
 
 
 const {width, height} = Dimensions.get('window');
-const ios = Platform.OS == 'ios';
+//const ios = Platform.OS == 'ios';
 
 export default function HomeScreen() {
   //const [activeCategory, setActiveCategory] = useState('Category 1');
@@ -28,9 +28,7 @@ export default function HomeScreen() {
     // Filter the books based on the selected category
     const filtered = bookItems.filter((book) => book.category === selectedCategory);
     setFilteredBooks(filtered);
-  }, [selectedCategory]);
-
-  
+  }, [selectedCategory]); 
 
   return (
     <View className="flex-1 relative bg-white">
@@ -43,15 +41,15 @@ export default function HomeScreen() {
       />
 
       <SafeAreaView className="flex-1">
-        {/* avatar and bell icon */}
+        {/* avatar icon */}
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 16 }}>
-          <TouchableOpacity onPress={()=> navigation.navigate('UserProfile')}>
+          {/* Add an empty view as a placeholder for spacing */}
+          <View />
+          <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
             <Image source={require('../assets/images/avatar.png')} style={{ width: 36, height: 36, borderRadius: 18 }} />
           </TouchableOpacity>
-          <TouchableOpacity>
-            <BellIcon size={27} color="black" />
-          </TouchableOpacity>
         </View>
+
 
         {/* search bar */}
         <View className="mx-5 shadow" style={{marginTop: height*0.06}}>

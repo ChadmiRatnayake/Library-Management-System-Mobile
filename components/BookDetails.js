@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { ArrowLeftIcon } from 'react-native-heroicons/solid'; // Import ArrowLeftIcon
 import { SafeAreaView } from 'react-native-safe-area-context'; // Import SafeAreaView
+
 
 export default function BookDetails({ route }) {
   const { book } = route.params;
@@ -10,6 +11,7 @@ export default function BookDetails({ route }) {
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
+      <ScrollView>
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.goBackButton}
@@ -25,6 +27,7 @@ export default function BookDetails({ route }) {
         <Text style={styles.bookLanguage}>Language: {book.language}</Text>
         <Text style={styles.bookAbstract}>{book.abstract}</Text>
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

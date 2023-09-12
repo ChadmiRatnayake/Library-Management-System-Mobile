@@ -41,12 +41,7 @@ export default function Books() {
         />
 
       </SafeAreaView>
-      <View style={styles.bottomRow}>
-        <Text style={styles.bottomText}>Already have an account?</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity>
-      </View>
+      
     </View>
   );
 }
@@ -94,6 +89,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 8,
     marginBottom: 16,
+    alignSelf: 'center',
   },
   bottomRow: {
     flexDirection: 'row',

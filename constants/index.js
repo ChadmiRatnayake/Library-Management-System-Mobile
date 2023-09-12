@@ -35,6 +35,9 @@ export const bookItems = [
     abstract:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel dolor non ex vehicula tincidunt.',
     available: true,
+    inWishlist: false, 
+    borrowed: false, 
+    reserved: false,
   },
   {
     id: '2',
@@ -44,8 +47,11 @@ export const bookItems = [
     author: 'Author 2',
     language: 'English',
     abstract:
-      'Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.',
+      'Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus. Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus. jnnkjxmsc mcnjcbsnc snmcjcndcjd cmscsjcnjcbhsxcxnc xcnsdcndjcnjdcnj Donec id orci et quam venenatis luctus. Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.',
     available: true,
+    inWishlist: false, 
+    borrowed: true, 
+    reserved: false,
   },
   {
     id: '3',
@@ -57,6 +63,9 @@ export const bookItems = [
     abstract:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel dolor non ex vehicula tincidunt.',
     available: false,
+    inWishlist: false, 
+    borrowed: true, 
+    reserved: false,
   },
   {
     id: '4',
@@ -68,6 +77,9 @@ export const bookItems = [
     abstract:
       'Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.',
     available: true,
+    inWishlist: false, 
+    borrowed: false, 
+    reserved: false,
   },
   {
     id: '5',
@@ -79,6 +91,9 @@ export const bookItems = [
     abstract:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel dolor non ex vehicula tincidunt.',
     available: true,
+    inWishlist: true, 
+    borrowed: true, 
+    reserved: false,
   },
   {
     id: '6',
@@ -90,6 +105,9 @@ export const bookItems = [
     abstract:
       'Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.',
     available: true,
+    inWishlist: false, 
+    borrowed: true, 
+    reserved: false,
   },
 
 ]

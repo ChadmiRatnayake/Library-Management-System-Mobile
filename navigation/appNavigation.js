@@ -1,29 +1,38 @@
+
 import { View, Text } from 'react-native'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from '../screens/HomeScreen';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
-import UserProfile from '../screens/UserProfile';
+import UserScreen from '../screens/UserScreen';
 import BookDetails from '../components/BookDetails';
-
+import HomeScreen from '../screens/HomeScreen';
+import BottomTabNavigator from '../components/BottomTabNavigator';
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
 
 
 export default function AppNavigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Welcome'>
-        <Stack.Screen name="Home" options={{headerShown: false}} component={HomeScreen} />
+        <Stack.Screen name="Library" options={{headerShown: false}} component={BottomTabNavigator} />
         <Stack.Screen name="Welcome" options={{headerShown: false}} component={WelcomeScreen} />
         <Stack.Screen name="Login" options={{headerShown: false}} component={LoginScreen} />
         <Stack.Screen name="SignUp" options={{headerShown: false}} component={SignUpScreen} />
-        <Stack.Screen name="UserProfile" options={{headerShown: false}} component={UserProfile} />
+        <Stack.Screen name="UserProfile" options={{headerShown: false}} component={UserScreen} />
         <Stack.Screen name="BookDetails" options={{headerShown: false}} component={BookDetails} />
       </Stack.Navigator>
+
+      {/* <Drawer.Navigator initialRouteName="Home">
+            <Drawer.Screen name="Home" component={HomeScreen} />
+            <Drawer.Screen name="Login" component={LoginScreen} />
+      </Drawer.Navigator> */}
     </NavigationContainer>
   )
 }
