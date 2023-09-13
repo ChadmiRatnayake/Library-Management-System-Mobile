@@ -3,17 +3,17 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {createDrawerNavigator} from '@react-navigation/drawer';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import UserScreen from '../screens/UserScreen';
 import BookDetails from '../components/BookDetails';
 import HomeScreen from '../screens/HomeScreen';
+import WishlistScreen from '../screens/WishlistScreen';
 import BottomTabNavigator from '../components/BottomTabNavigator';
+import EditProfileScreen from '../screens/EditProfileScreen';
 
 const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
 
 
 
@@ -27,12 +27,13 @@ export default function AppNavigation() {
         <Stack.Screen name="SignUp" options={{headerShown: false}} component={SignUpScreen} />
         <Stack.Screen name="UserProfile" options={{headerShown: false}} component={UserScreen} />
         <Stack.Screen name="BookDetails" options={{headerShown: false}} component={BookDetails} />
+        <Stack.Screen name="Wishlist" options={{headerShown: false}} component={WishlistScreen} />
+        <Stack.Screen name="EditProfile" options={{headerShown: true}} component={EditProfileScreen} />
+        
+        
       </Stack.Navigator>
 
-      {/* <Drawer.Navigator initialRouteName="Home">
-            <Drawer.Screen name="Home" component={HomeScreen} />
-            <Drawer.Screen name="Login" component={LoginScreen} />
-      </Drawer.Navigator> */}
+      
     </NavigationContainer>
   )
 }

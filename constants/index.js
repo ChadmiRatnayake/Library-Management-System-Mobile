@@ -49,7 +49,7 @@ export const bookItems = [
     abstract:
       'Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus. Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus. jnnkjxmsc mcnjcbsnc snmcjcndcjd cmscsjcnjcbhsxcxnc xcnsdcndjcnjdcnj Donec id orci et quam venenatis luctus. Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.',
     available: true,
-    inWishlist: false, 
+    inWishlist: true, 
     borrowed: true, 
     reserved: false,
   },

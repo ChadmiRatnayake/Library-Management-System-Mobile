@@ -5,7 +5,7 @@ import { themeColors } from '../theme';
 
 export default function Categories({ selectedCategory, setActiveCategory }) {
   return (
-    <View style={{ paddingHorizontal: 20, marginTop: 6 }}>
+    <View style={{ paddingHorizontal: 20, marginTop: 6, marginBottom: 10 }}>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -14,7 +14,7 @@ export default function Categories({ selectedCategory, setActiveCategory }) {
         contentContainerStyle={{ overflow: 'visible' }}
         renderItem={({ item }) => {
           let isActive = item.id === selectedCategory;
-          let activeTextStyles = isActive ? { color: 'white' } : { color: 'gray' };
+          let activeTextStyles = isActive ? { color: 'white' } : { color: 'black' };
           let containerStyles = isActive
             ? { backgroundColor: themeColors.bgLight }
             : { backgroundColor: '#d4a574' };

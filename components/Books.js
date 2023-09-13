@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image, FlatList, StyleSheet, Dimensions }
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { themeColors } from '../theme';
-import { categoryData, bookItems } from '../constants'; // Import dummy data
+import { bookItems } from '../constants'; // Import dummy data
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -53,7 +53,10 @@ const styles = StyleSheet.create({
   },
   safeAreaContainer: {
     flex: 1,
-    padding: 16,
+    paddingTop: -10,
+    paddingLeft: 16,
+    paddingRight: 16,
+    
   },
   title: {
     fontSize: 24,

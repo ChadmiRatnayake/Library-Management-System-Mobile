@@ -32,23 +32,23 @@ export default function HomeScreen() {
 
   return (
     <View className="flex-1 relative bg-white">
-      <StatusBar />
+      {/* <StatusBar /> */}
 
       <Image 
         source={require('../assets/images/bgBooks.jpg')} 
-        className="w-full absolute -top-5 opacity-10" 
+        className="w-full absolute -top-5 opacity-3" 
         style = {{height: 300}}
       />
 
       <SafeAreaView className="flex-1">
         {/* avatar icon */}
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 16 }}>
+        {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 16 }}>
           {/* Add an empty view as a placeholder for spacing */}
           <View />
-          <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
+          {/* <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
             <Image source={require('../assets/images/avatar.png')} style={{ width: 36, height: 36, borderRadius: 18 }} />
           </TouchableOpacity>
-        </View>
+        </View> */} 
 
 
         {/* search bar */}

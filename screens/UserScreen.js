@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, SafeAreaView, StyleSheet} from 'react-native';
+import {View, SafeAreaView, StyleSheet, ScrollView} from 'react-native';
 import {
   Avatar,
   Title,
@@ -9,43 +9,44 @@ import {
 } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native'
 
 
 const UserScreen = () => { 
-
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
-
+      <ScrollView>
       <View style={styles.userInfoSection}>
         <View style={{flexDirection: 'row', marginTop: 15}}>
           <Avatar.Image 
-            source={{
-              uri: 'https://api.adorable.io/avatars/80/abott@adorable.png',
-            }}
+            source={
+              require('../assets/images/profilePic.png')
+            }
             size={80}
           />
           <View style={{marginLeft: 20}}>
             <Title style={[styles.title, {
               marginTop:15,
               marginBottom: 5,
-            }]}>John Doe</Title>
-            <Caption style={styles.caption}>@j_doe</Caption>
+            }]}>John White</Title>
+            <Caption style={styles.caption}>@joeW</Caption>
           </View>
         </View>
       </View>
 
       <View style={styles.userInfoSection}>
         <View style={styles.row}>
+          <Icon name="email" color="#777777" size={20}/>
+          <Text style={{color:"#777777", marginLeft: 20}}>john_white@gmail.com</Text>
+        </View>
+        <View style={styles.row}>
           <Icon name="map-marker-radius" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>Kolkata, India</Text>
+          <Text style={{color:"#777777", marginLeft: 20}}>No.17, Flower Road, Colombo 4</Text>
         </View>
         <View style={styles.row}>
           <Icon name="phone" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>+91-900000009</Text>
-        </View>
-        <View style={styles.row}>
-          <Icon name="email" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>john_doe@email.com</Text>
+          <Text style={{color:"#777777", marginLeft: 20}}>+94 777722992</Text>
         </View>
       </View>
 
@@ -54,20 +55,38 @@ const UserScreen = () => {
             borderRightColor: '#dddddd',
             borderRightWidth: 1
           }]}>
-            <Title>₹140.50</Title>
-            <Caption>Wallet</Caption>
+            <Title>2</Title>
+            <Caption>Reserved Books</Caption>
           </View>
           <View style={styles.infoBox}>
-            <Title>12</Title>
-            <Caption>Orders</Caption>
+            <Title>3</Title>
+            <Caption>Borrowed Books</Caption>
           </View>
       </View>
 
       <View style={styles.menuWrapper}>
-        <TouchableRipple onPress={() => {}}>
+        <TouchableRipple onPress={()=> navigation.navigate('Wishlist')}>
           <View style={styles.menuItem}>
             <Icon name="heart-outline" color="#FF6347" size={25}/>
-            <Text style={styles.menuItemText}>Your Favorites</Text>
+            <Text style={styles.menuItemText}>Your Wishlist</Text>
+          </View>
+        </TouchableRipple>
+        <TouchableRipple onPress={() => {}}>
+          <View style={styles.menuItem}>
+            <Icon name="cart" color="#FF6347" size={25}/>
+            <Text style={styles.menuItemText}>Reserved Books</Text>
+          </View>
+        </TouchableRipple>
+        <TouchableRipple onPress={() => {}}>
+          <View style={styles.menuItem}>
+            <Icon name="book" color="#FF6347" size={25}/>
+            <Text style={styles.menuItemText}>Currently Borrowed Books</Text>
+          </View>
+        </TouchableRipple>
+        <TouchableRipple onPress={() => {}}>
+          <View style={styles.menuItem}>
+            <Icon name="book" color="#FF6347" size={25}/>
+            <Text style={styles.menuItemText}>Borrowed Books History</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple onPress={() => {}}>
@@ -85,6 +104,7 @@ const UserScreen = () => {
         </TouchableRipple>
         
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
