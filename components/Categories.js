@@ -21,7 +21,7 @@ export default function Categories({ selectedCategory, setActiveCategory }) {
           
           return (
             <TouchableOpacity
-              onPress={() => setActiveCategory(item.id)}
+              onPress={() => setActiveCategory(item.category)}
               style={[containerStyles, { padding: 8, paddingHorizontal: 20, marginRight: 10, borderRadius: 999, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5 }]}
             >
               <Text style={[{ fontWeight: 'bold' }, activeTextStyles]}>

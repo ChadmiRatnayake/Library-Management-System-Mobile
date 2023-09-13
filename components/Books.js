@@ -7,7 +7,7 @@ import { bookItems } from '../constants'; // Import dummy data
 
 const windowWidth = Dimensions.get('window').width;
 
-export default function Books() {
+export default function Books({ selectedCategory }) {
   const navigation = useNavigation();
 
   const renderBookItem = ({ item }) => (

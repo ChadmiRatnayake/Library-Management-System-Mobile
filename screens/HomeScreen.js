@@ -28,7 +28,8 @@ export default function HomeScreen() {
     // Filter the books based on the selected category
     const filtered = bookItems.filter((book) => book.category === selectedCategory);
     setFilteredBooks(filtered);
-  }, [selectedCategory]); 
+  }, [selectedCategory]);
+  
 
   return (
     <View className="flex-1 relative bg-white">
@@ -70,7 +71,8 @@ export default function HomeScreen() {
         <View>  
           <Categories activeCategory={selectedCategory} setActiveCategory={setSelectedCategory}/>
         </View>
-        <Books/>
+        <Books selectedCategory={selectedCategory} />
+
         
         
       {/* <Books books={filteredBooks} />

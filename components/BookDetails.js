@@ -5,15 +5,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'; // or '@fortawesome/free-regular-svg-icons' for regular style
-
+import { faArrowLeft, faCheck, faTimes  } from '@fortawesome/free-solid-svg-icons'; // or '@fortawesome/free-regular-svg-icons' for regular style
+import Icon from 'react-native-vector-icons'
 
 
 export default function BookDetails({ route }) {
   const { book } = route.params;
   const navigation = useNavigation();
+
+
   const [wishlisted, setWishlisted] = useState(false);
   const [reserved, setReserved] = useState(false);
+
+
+  // Define the availability icon based on the book's availability
+  const availabilityIcon = book.available ? (
+    <FontAwesomeIcon icon={faCheck} size={20} color="green" />
+  ) : (
+    <FontAwesomeIcon icon={faTimes} size={20} color="red" />
+  );
 
   const handleWishlistToggle = () => {
     setWishlisted(!wishlisted);
@@ -40,36 +50,49 @@ export default function BookDetails({ route }) {
         <Image source={book.coverPage} style={styles.bookImage} />
         <Text style={styles.bookTitle}>{book.title}</Text>
 
+        <View style={styles.availabilityContainer}>
+          <Text style={styles.availabilityText}>
+            Availability: {availabilityIcon}
+          </Text>
+        </View>
+
+        
+
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            style={styles.wishlistButton}
+            style={styles.iconTextContainer}
             onPress={handleWishlistToggle}
           >
-            <FontAwesomeIcon
-              icon={faHeart}
-              size={24}
-              color={wishlisted ? 'red' : 'gray'}
-            />
+            <View style={styles.iconContainer}>
+              <FontAwesomeIcon
+                icon={faHeart}
+                size={24}
+                color={wishlisted ? 'red' : 'gray'}
+              />
+            </View>
             <Text style={styles.buttonText}>
               {wishlisted ? 'Wishlisted' : 'Add to Wishlist'}
             </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.reserveButton}
+            style={styles.iconTextContainer}
             onPress={handleReserveToggle}
             disabled={book.reserved}
           >
-            <FontAwesomeIcon
-              icon={faShoppingBag}
-              size={24}
-              color={book.reserved ? 'gray' : 'green'} // Make the bag icon green
-            />
+            <View style={styles.iconContainer}>
+              <FontAwesomeIcon
+                icon={faShoppingBag}
+                size={24}
+                color={book.reserved ? 'gray' : 'green'} 
+              />
+            </View>
             <Text style={styles.buttonText}>
               {book.reserved ? 'Reserved' : 'Reserve'}
             </Text>
           </TouchableOpacity>
         </View>
+
 
         <Text style={styles.bookCategory}>Category: {book.category}</Text>
         <Text style={styles.bookAuthor}>Author: {book.author}</Text>
@@ -113,9 +136,21 @@ const styles = StyleSheet.create({
     marginTop: 16,
     alignSelf: 'center',
   },
+  availabilityContainer: {
+    flexDirection: 'row',
+    alignItems: 'center', // Center the availability icon and text horizontally
+    justifyContent: 'center',
+    marginTop: 16,
+  },
+  availabilityText: {
+    fontSize: 16,
+    marginLeft: 8,
+    alignSelf: 'center',
+  },
   bookCategory: {
     fontSize: 16,
     marginTop: 8,
+    fontWeight: 'bold',
   },
   bookAuthor: {
     fontSize: 16,
@@ -133,7 +168,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 16,
+    marginBottom: 16,
   },
+  iconTextContainer: {
+    alignItems: 'center',
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 16,
+    marginTop: 4, // Adjust the spacing between the icon and text
+  },
+  
   wishlistButton: {
     flexDirection: 'row',
     alignItems: 'center',
