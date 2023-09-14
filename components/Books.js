@@ -1,14 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, TouchableOpacity, Image, FlatList, StyleSheet, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { themeColors } from '../theme';
-import { categoryData, bookItems } from '../constants'; // Import dummy data
+import { bookItems } from '../constants'; // Import dummy data
 
 const windowWidth = Dimensions.get('window').width;
 
 export default function Books() {
   const navigation = useNavigation();
+
+
+  
 
   const renderBookItem = ({ item }) => (
     <TouchableOpacity
@@ -33,20 +36,17 @@ export default function Books() {
         </Text>
 
         <FlatList
-          data={bookItems}
+          data={bookItems} // Use the filtered books
           keyExtractor={(item) => item.id}
           renderItem={renderBookItem}
           numColumns={2}
           columnWrapperStyle={styles.columnWrapper}
         />
 
+
+
       </SafeAreaView>
-      <View style={styles.bottomRow}>
-        <Text style={styles.bottomText}>Already have an account?</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity>
-      </View>
+      
     </View>
   );
 }
@@ -58,7 +58,10 @@ const styles = StyleSheet.create({
   },
   safeAreaContainer: {
     flex: 1,
-    padding: 16,
+    paddingTop: -10,
+    paddingLeft: 16,
+    paddingRight: 16,
+    
   },
   title: {
     fontSize: 24,
@@ -94,6 +97,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 8,
     marginBottom: 16,
+    alignSelf: 'center',
   },
   bottomRow: {
     flexDirection: 'row',

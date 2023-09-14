@@ -4,11 +4,11 @@
 export const categoryData = [
   {
     id: 1,
-    title: "Category 1",
+    title: "Fiction",
   },
   {
     id: 2,
-    title: "Category 2",
+    title: "Science",
   },
   {
     id: 3,
@@ -35,6 +35,10 @@ export const bookItems = [
     abstract:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel dolor non ex vehicula tincidunt.',
     available: true,
+    inWishlist: false, 
+    borrowed: false, 
+    reserved: false,
+    overDue: false,
   },
   {
     id: '2',
@@ -44,19 +48,27 @@ export const bookItems = [
     author: 'Author 2',
     language: 'English',
     abstract:
-      'Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.',
+      'Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus. Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus. jnnkjxmsc mcnjcbsnc snmcjcndcjd cmscsjcnjcbhsxcxnc xcnsdcndjcnjdcnj Donec id orci et quam venenatis luctus. Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.',
     available: true,
+    inWishlist: true, 
+    borrowed: false, 
+    reserved: true,
+    overDue: false,
   },
   {
     id: '3',
     coverPage: require('../assets/images/charlieChocoFac.jpg'),
     title: 'Book 1',
-    category: 'Fiction',
+    category: 'Category 3',
     author: 'Author 1',
     language: 'English',
     abstract:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel dolor non ex vehicula tincidunt.',
     available: false,
+    inWishlist: false, 
+    borrowed: true, 
+    reserved: false,
+    overDue: false,
   },
   {
     id: '4',
@@ -68,6 +80,10 @@ export const bookItems = [
     abstract:
       'Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.',
     available: true,
+    inWishlist: true, 
+    borrowed: false, 
+    reserved: false,
+    overDue: true,
   },
   {
     id: '5',
@@ -79,6 +95,10 @@ export const bookItems = [
     abstract:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel dolor non ex vehicula tincidunt.',
     available: true,
+    inWishlist: true, 
+    borrowed: true, 
+    reserved: false,
+    overDue: false,
   },
   {
     id: '6',
@@ -90,6 +110,10 @@ export const bookItems = [
     abstract:
       'Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.',
     available: true,
+    inWishlist: false, 
+    borrowed: true, 
+    reserved: true,
+    overDue: false,
   },
 
 ]

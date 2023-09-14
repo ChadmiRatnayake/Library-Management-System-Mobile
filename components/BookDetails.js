@@ -1,30 +1,109 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { ArrowLeftIcon } from 'react-native-heroicons/solid'; // Import ArrowLeftIcon
-import { SafeAreaView } from 'react-native-safe-area-context'; // Import SafeAreaView
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { faArrowLeft, faCheck, faTimes  } from '@fortawesome/free-solid-svg-icons';
 
 export default function BookDetails({ route }) {
   const { book } = route.params;
-  const navigation = useNavigation(); // Access navigation object
+  const navigation = useNavigation();
+
+  const [wishlisted, setWishlisted] = useState(false);
+  const [reserved, setReserved] = useState(false);
+  const [bookReserved, setBookReserved] = useState(false);
+  const [bookBorrowed, setBookBorrowed] = useState(false);
+
+  useEffect(() => {
+    setBookReserved(book.reserved);
+    setBookBorrowed(book.borrowed);
+  }, [book]);
+
+  const availabilityIcon = book.available ? (
+    <FontAwesomeIcon icon={faCheck} size={20} color="green" />
+  ) : (
+    <FontAwesomeIcon icon={faTimes} size={20} color="red" />
+  );
+
+  const handleWishlistToggle = () => {
+    if (!bookReserved && !bookBorrowed) {
+      setWishlisted(!wishlisted);
+    }
+  };
+
+  const handleReserveToggle = () => {
+    if (!bookBorrowed) {
+      if (!bookReserved) {
+        setReserved(!reserved);
+      }
+      setBookReserved(!bookReserved);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.goBackButton}
-          onPress={() => navigation.goBack()}
-        >
-          <ArrowLeftIcon size={20} color="black" />
-        </TouchableOpacity>
+      <ScrollView>
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.goBackButton}
+            onPress={() => navigation.goBack()}
+          >
+            <FontAwesomeIcon icon={faArrowLeft} size={20} color="black" />
+          </TouchableOpacity>
 
-        <Image source={book.coverPage} style={styles.bookImage} />
-        <Text style={styles.bookTitle}>{book.title}</Text>
-        <Text style={styles.bookCategory}>Category: {book.category}</Text>
-        <Text style={styles.bookAuthor}>Author: {book.author}</Text>
-        <Text style={styles.bookLanguage}>Language: {book.language}</Text>
-        <Text style={styles.bookAbstract}>{book.abstract}</Text>
-      </View>
+          <Image source={book.coverPage} style={styles.bookImage} />
+          <Text style={styles.bookTitle}>{book.title}</Text>
+
+          <View style={styles.availabilityContainer}>
+            <Text style={styles.availabilityText}>
+              Availability: {availabilityIcon}
+            </Text>
+          </View>
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.iconTextContainer}
+              onPress={handleWishlistToggle}
+              disabled={bookReserved || bookBorrowed}
+            >
+              <View style={styles.iconContainer}>
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  size={24}
+                  color={wishlisted ? 'red' : 'gray'}
+                />
+              </View>
+              <Text style={styles.buttonText}>
+                {wishlisted ? 'Wishlisted' : 'Add to Wishlist'}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.iconTextContainer}
+              onPress={handleReserveToggle}
+              disabled={bookBorrowed}
+            >
+              <View style={styles.iconContainer}>
+                <FontAwesomeIcon
+                  icon={faShoppingBag}
+                  size={24}
+                  color={book.reserved ? 'gray' : 'green'}
+                />
+              </View>
+              <Text style={styles.buttonText}>
+                {book.reserved ? 'Reserved' : 'Reserve'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <Text style={styles.bookCategory}>Category: {book.category}</Text>
+          <Text style={styles.bookAuthor}>Author: {book.author}</Text>
+          <Text style={styles.bookLanguage}>Language: {book.language}</Text>
+          <Text style={styles.bookAbstract}>{book.abstract}</Text>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -45,7 +124,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 0,
     marginLeft: 4,
     marginTop: 4,
-    alignSelf: 'flex-start', // Align to the top-left corner
+    alignSelf: 'flex-start',
   },
   bookImage: {
     width: '50%',
@@ -58,10 +137,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 16,
     alignSelf: 'center',
+    justifyContent: 'center',
+  },
+  availabilityContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 16,
+  },
+  availabilityText: {
+    fontSize: 16,
+    marginLeft: 8,
+    alignSelf: 'center',
   },
   bookCategory: {
     fontSize: 16,
     marginTop: 8,
+    fontWeight: 'bold',
   },
   bookAuthor: {
     fontSize: 16,
@@ -74,5 +166,22 @@ const styles = StyleSheet.create({
   bookAbstract: {
     fontSize: 16,
     marginTop: 16,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 16,
+    marginBottom: 16,
+  },
+  iconTextContainer: {
+    alignItems: 'center',
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 16,
+    marginTop: 4,
   },
 });

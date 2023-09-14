@@ -15,10 +15,11 @@ import { useNavigation } from '@react-navigation/native'
 
 
 const {width, height} = Dimensions.get('window');
-const ios = Platform.OS == 'ios';
+//const ios = Platform.OS == 'ios';
 
 export default function HomeScreen() {
   //const [activeCategory, setActiveCategory] = useState('Category 1');
+  const [searchInput, setSearchInput] = useState('');
   const [filteredBooks, setFilteredBooks] = useState(bookItems);
   const [selectedCategory, setSelectedCategory] = useState('Category 1');
 
@@ -29,33 +30,33 @@ export default function HomeScreen() {
     const filtered = bookItems.filter((book) => book.category === selectedCategory);
     setFilteredBooks(filtered);
   }, [selectedCategory]);
-
   
 
   return (
     <View className="flex-1 relative bg-white">
-      <StatusBar />
+      {/* <StatusBar /> */}
 
       <Image 
         source={require('../assets/images/bgBooks.jpg')} 
-        className="w-full absolute -top-5 opacity-10" 
+        className="w-full absolute -top-5 opacity-3" 
         style = {{height: 300}}
       />
 
       <SafeAreaView className="flex-1">
-        {/* avatar and bell icon */}
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 16 }}>
-          <TouchableOpacity onPress={()=> navigation.navigate('UserProfile')}>
+        {/* avatar icon */}
+        {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 16 }}>
+          {/* Add an empty view as a placeholder for spacing */}
+          <View />
+          {/* <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
             <Image source={require('../assets/images/avatar.png')} style={{ width: 36, height: 36, borderRadius: 18 }} />
           </TouchableOpacity>
-          <TouchableOpacity>
-            <BellIcon size={27} color="black" />
-          </TouchableOpacity>
-        </View>
+        </View> */} 
+
 
         {/* search bar */}
         <View className="mx-5 shadow" style={{marginTop: height*0.06}}>
           <View className="flex-row items-center rounded-full p-1 bg-[#e6e6e6]">
+
             <TextInput placeholder='Search' className="p-4 flex-1 font-semibold text-gray-700" />
             <TouchableOpacity 
               className="rounded-full p-2" 
@@ -72,7 +73,9 @@ export default function HomeScreen() {
         <View>  
           <Categories activeCategory={selectedCategory} setActiveCategory={setSelectedCategory}/>
         </View>
-        <Books/>
+        <Books selectedCategory={selectedCategory} />
+
+
         
         
       {/* <Books books={filteredBooks} />
