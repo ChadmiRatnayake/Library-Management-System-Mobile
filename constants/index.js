@@ -38,6 +38,7 @@ export const bookItems = [
     inWishlist: false, 
     borrowed: false, 
     reserved: false,
+    overDue: false,
   },
   {
     id: '2',
@@ -50,8 +51,9 @@ export const bookItems = [
       'Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus. Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus. jnnkjxmsc mcnjcbsnc snmcjcndcjd cmscsjcnjcbhsxcxnc xcnsdcndjcnjdcnj Donec id orci et quam venenatis luctus. Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.',
     available: true,
     inWishlist: true, 
-    borrowed: true, 
-    reserved: false,
+    borrowed: false, 
+    reserved: true,
+    overDue: false,
   },
   {
     id: '3',
@@ -66,20 +68,22 @@ export const bookItems = [
     inWishlist: false, 
     borrowed: true, 
     reserved: false,
+    overDue: false,
   },
   {
     id: '4',
     coverPage: require('../assets/images/paddington.jpg'),
     title: 'Book 2',
-    category: 'Category 5',
+    category: 'Science',
     author: 'Author 2',
     language: 'English',
     abstract:
       'Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.',
     available: true,
-    inWishlist: false, 
+    inWishlist: true, 
     borrowed: false, 
     reserved: false,
+    overDue: true,
   },
   {
     id: '5',
@@ -94,6 +98,7 @@ export const bookItems = [
     inWishlist: true, 
     borrowed: true, 
     reserved: false,
+    overDue: false,
   },
   {
     id: '6',
@@ -108,6 +113,7 @@ export const bookItems = [
     inWishlist: false, 
     borrowed: true, 
     reserved: true,
+    overDue: false,
   },
 
 ]

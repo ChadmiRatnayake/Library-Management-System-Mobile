@@ -338,7 +338,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'; 
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import ImagePicker from 'react-native-image-picker';
 
 const EditProfileScreen = () => {
 
@@ -355,9 +355,33 @@ const EditProfileScreen = () => {
 
   // Function to handle profile picture upload
   const selectProfileImage = () => {
-    console.warn("Profile Image Selected");
+    const options = {
+      title: 'Select Profile Picture',
+      cancelButtonTitle: 'Cancel',
+      takePhotoButtonTitle: 'Take Photo',
+      chooseFromLibraryButtonTitle: 'Choose from Library',
+      customButtons: [{ name: 'delete', title: 'Delete Profile Picture' }],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
     };
-
+  
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton === 'delete') {
+        // Handle delete option here
+        setProfileImage(null); // Clear the profile image
+      } else {
+        // Handle selected image from camera/gallery here
+        setProfileImage({ uri: response.uri });
+      }
+    });
+  };
+  
   // Function to save changes
   const saveChanges = () => {
     console.warn("Saved Changes");
@@ -370,7 +394,7 @@ const EditProfileScreen = () => {
         <SafeAreaView>
       {/* Profile Picture */}
       <View style={styles.profileImageContainer}>
-  <TouchableOpacity >
+  <TouchableOpacity onPress={selectProfileImage}>
     <View style={styles.profileImageWrapper}>
       <Image
         source={profileImage ? { uri: profileImage.uri } : require('../assets/images/profilePic.png')}

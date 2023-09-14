@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { faArrowLeft, faCheck, faTimes  } from '@fortawesome/free-solid-svg-icons'; // or '@fortawesome/free-regular-svg-icons' for regular style
-import Icon from 'react-native-vector-icons'
-
+import { faArrowLeft, faCheck, faTimes  } from '@fortawesome/free-solid-svg-icons';
 
 export default function BookDetails({ route }) {
   const { book } = route.params;
   const navigation = useNavigation();
 
-
   const [wishlisted, setWishlisted] = useState(false);
   const [reserved, setReserved] = useState(false);
+  const [bookReserved, setBookReserved] = useState(false);
+  const [bookBorrowed, setBookBorrowed] = useState(false);
 
+  useEffect(() => {
+    setBookReserved(book.reserved);
+    setBookBorrowed(book.borrowed);
+  }, [book]);
 
-  // Define the availability icon based on the book's availability
   const availabilityIcon = book.available ? (
     <FontAwesomeIcon icon={faCheck} size={20} color="green" />
   ) : (
@@ -26,81 +28,81 @@ export default function BookDetails({ route }) {
   );
 
   const handleWishlistToggle = () => {
-    setWishlisted(!wishlisted);
+    if (!bookReserved && !bookBorrowed) {
+      setWishlisted(!wishlisted);
+    }
   };
 
   const handleReserveToggle = () => {
-    // Check if the book is not already reserved
-    if (!book.reserved) {
-      setReserved(!reserved);
+    if (!bookBorrowed) {
+      if (!bookReserved) {
+        setReserved(!reserved);
+      }
+      setBookReserved(!bookReserved);
     }
   };
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <ScrollView>
-      <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.goBackButton}
-          onPress={() => navigation.goBack()}
-        >
-          <FontAwesomeIcon icon={faArrowLeft} size={20} color="black" />
-        </TouchableOpacity>
-
-        <Image source={book.coverPage} style={styles.bookImage} />
-        <Text style={styles.bookTitle}>{book.title}</Text>
-
-        <View style={styles.availabilityContainer}>
-          <Text style={styles.availabilityText}>
-            Availability: {availabilityIcon}
-          </Text>
-        </View>
-
-        
-
-        <View style={styles.buttonContainer}>
+        <View style={styles.container}>
           <TouchableOpacity
-            style={styles.iconTextContainer}
-            onPress={handleWishlistToggle}
+            style={styles.goBackButton}
+            onPress={() => navigation.goBack()}
           >
-            <View style={styles.iconContainer}>
-              <FontAwesomeIcon
-                icon={faHeart}
-                size={24}
-                color={wishlisted ? 'red' : 'gray'}
-              />
-            </View>
-            <Text style={styles.buttonText}>
-              {wishlisted ? 'Wishlisted' : 'Add to Wishlist'}
-            </Text>
+            <FontAwesomeIcon icon={faArrowLeft} size={20} color="black" />
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.iconTextContainer}
-            onPress={handleReserveToggle}
-            disabled={book.reserved}
-          >
-            <View style={styles.iconContainer}>
-              <FontAwesomeIcon
-                icon={faShoppingBag}
-                size={24}
-                color={book.reserved ? 'gray' : 'green'} 
-              />
-            </View>
-            <Text style={styles.buttonText}>
-              {book.reserved ? 'Reserved' : 'Reserve'}
+          <Image source={book.coverPage} style={styles.bookImage} />
+          <Text style={styles.bookTitle}>{book.title}</Text>
+
+          <View style={styles.availabilityContainer}>
+            <Text style={styles.availabilityText}>
+              Availability: {availabilityIcon}
             </Text>
-          </TouchableOpacity>
+          </View>
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.iconTextContainer}
+              onPress={handleWishlistToggle}
+              disabled={bookReserved || bookBorrowed}
+            >
+              <View style={styles.iconContainer}>
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  size={24}
+                  color={wishlisted ? 'red' : 'gray'}
+                />
+              </View>
+              <Text style={styles.buttonText}>
+                {wishlisted ? 'Wishlisted' : 'Add to Wishlist'}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.iconTextContainer}
+              onPress={handleReserveToggle}
+              disabled={bookBorrowed}
+            >
+              <View style={styles.iconContainer}>
+                <FontAwesomeIcon
+                  icon={faShoppingBag}
+                  size={24}
+                  color={book.reserved ? 'gray' : 'green'}
+                />
+              </View>
+              <Text style={styles.buttonText}>
+                {book.reserved ? 'Reserved' : 'Reserve'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <Text style={styles.bookCategory}>Category: {book.category}</Text>
+          <Text style={styles.bookAuthor}>Author: {book.author}</Text>
+          <Text style={styles.bookLanguage}>Language: {book.language}</Text>
+          <Text style={styles.bookAbstract}>{book.abstract}</Text>
         </View>
-
-
-        <Text style={styles.bookCategory}>Category: {book.category}</Text>
-        <Text style={styles.bookAuthor}>Author: {book.author}</Text>
-        <Text style={styles.bookLanguage}>Language: {book.language}</Text>
-        <Text style={styles.bookAbstract}>{book.abstract}</Text>
-
-        
-      </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -135,10 +137,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 16,
     alignSelf: 'center',
+    justifyContent: 'center',
   },
   availabilityContainer: {
     flexDirection: 'row',
-    alignItems: 'center', // Center the availability icon and text horizontally
+    alignItems: 'center',
     justifyContent: 'center',
     marginTop: 16,
   },
@@ -179,19 +182,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    marginTop: 4, // Adjust the spacing between the icon and text
-  },
-  
-  wishlistButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  reserveButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  buttonText: {
-    fontSize: 16,
-    marginLeft: 8,
+    marginTop: 4,
   },
 });

@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-const BookCard = ({ book, showRemoveButton, onRemovePress, onPress }) => {
+const OverdueBookCard = ({ book, onBookPress }) => {
   return (
-    <TouchableOpacity onPress={() => onPress(book)}>
+    <TouchableOpacity onPress={() => onBookPress(book)}>
       <View style={styles.bookItem}>
         <Image source={book.coverPage} style={styles.bookImage} />
         <View style={styles.bookCard}>
@@ -12,13 +12,10 @@ const BookCard = ({ book, showRemoveButton, onRemovePress, onPress }) => {
           <Text style={styles.bookAuthor}>Author: {book.author}</Text>
           <Text style={styles.bookLanguage}>Language: {book.language}</Text>
         </View>
-        {showRemoveButton && (
-          <TouchableOpacity
-            style={styles.removeButton}
-            onPress={onRemovePress}
-          >
-            <Text style={styles.removeButtonText}>Remove</Text>
-          </TouchableOpacity>
+        {book.overDue && (
+          <View style={styles.overdueLabelContainer}>
+            <Text style={styles.overdueLabel}>Overdue</Text>
+          </View>
         )}
       </View>
     </TouchableOpacity>
@@ -53,18 +50,18 @@ const styles = StyleSheet.create({
   bookLanguage: {
     fontSize: 16,
   },
-  removeButton: {
+  overdueLabelContainer: {
     backgroundColor: 'red',
-    paddingVertical: 8,
-    paddingHorizontal: 6,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  removeButtonText: {
+  overdueLabel: {
     color: 'white',
     fontWeight: 'bold',
   },
 });
 
-export default BookCard;
+export default OverdueBookCard;
