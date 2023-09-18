@@ -4,7 +4,7 @@
 export const categoryData = [
   {
     id: 1,
-    title: "Fiction",
+    title: "Adventurous",
   },
   {
     id: 2,
@@ -12,7 +12,7 @@ export const categoryData = [
   },
   {
     id: 3,
-    title: "Category 3",
+    title: "Fiction",
   },
   {
     id: 4,
@@ -27,9 +27,9 @@ export const categoryData = [
 export const bookItems = [
   {
     id: '1',
-    coverPage: require('../assets/images/charlieChocoFac.jpg'),
+    coverPage: require('../assets/images/charlieChocoFactory.jpg'),
     title: 'Charlie & the Chocolate Factory',
-    category: 'Fiction',
+    category: 'Adventurous',
     author: 'Author 1',
     language: 'English',
     abstract:
@@ -57,23 +57,23 @@ export const bookItems = [
   },
   {
     id: '3',
-    coverPage: require('../assets/images/charlieChocoFac.jpg'),
-    title: 'Book 1',
-    category: 'Category 3',
-    author: 'Author 1',
+    coverPage: require('../assets/images/TintinInAmerica.jpg'),
+    title: 'Tintin In America',
+    category: 'Adventurous',
+    author: 'Georges Remi',
     language: 'English',
     abstract:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel dolor non ex vehicula tincidunt.',
     available: false,
     inWishlist: false, 
-    borrowed: true, 
+    borrowed: false, 
     reserved: false,
     overDue: false,
   },
   {
     id: '4',
-    coverPage: require('../assets/images/paddington.jpg'),
-    title: 'Book 2',
+    coverPage: require('../assets/images/underTheOcean.jpg'),
+    title: 'Under The Ocean',
     category: 'Science',
     author: 'Author 2',
     language: 'English',
@@ -87,8 +87,8 @@ export const bookItems = [
   },
   {
     id: '5',
-    coverPage: require('../assets/images/charlieChocoFac.jpg'),
-    title: 'Book 1',
+    coverPage: require('../assets/images/magicTreeHouse.jpg'),
+    title: 'Magic Tree House',
     category: 'Fiction',
     author: 'Author 1',
     language: 'English',
@@ -96,14 +96,14 @@ export const bookItems = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel dolor non ex vehicula tincidunt.',
     available: true,
     inWishlist: true, 
-    borrowed: true, 
+    borrowed: false, 
     reserved: false,
     overDue: false,
   },
   {
     id: '6',
-    coverPage: require('../assets/images/paddington.jpg'),
-    title: 'Book 2',
+    coverPage: require('../assets/images/rocketTheBrave.jpg'),
+    title: 'Rocket the Brave',
     category: 'Science',
     author: 'Author 2',
     language: 'English',

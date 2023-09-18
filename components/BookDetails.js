@@ -66,7 +66,7 @@ export default function BookDetails({ route }) {
             <TouchableOpacity
               style={styles.iconTextContainer}
               onPress={handleWishlistToggle}
-              disabled={bookReserved || bookBorrowed}
+              // disabled={bookReserved || bookBorrowed}
             >
               <View style={styles.iconContainer}>
                 <FontAwesomeIcon

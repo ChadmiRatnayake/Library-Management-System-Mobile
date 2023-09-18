@@ -15,7 +15,7 @@ export default function WelcomeScreen() {
             </Text>
             <View className="flex-row justify-center">
                 <Image source={require("../assets/images/logo.png")}
-                    style={{width: 350, height: 350}} />
+                    style={{width: 350, height: 350, resizeMode: 'contain'}} />
             </View>
             <View className="space-y-4">
                 <TouchableOpacity

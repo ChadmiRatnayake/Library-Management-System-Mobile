@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, Dimensions, TextInput, TouchableOpacity, FlatList, Platform } from 'react-native'
+import { View, Text, Image, Dimensions, TextInput, TouchableOpacity, FlatList, Platform, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
 import { BellIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
@@ -9,8 +9,9 @@ import Carousel from 'react-native-snap-carousel';
 import Categories from '../components/Categories'
 //import BookCard from '../components/BookCard';
 import axios from 'axios';
-import Books from '../components/Books';
+import Books, { BooksFavourites, BooksReccomended, BooksRecent } from '../components/Books';
 import { useNavigation } from '@react-navigation/native'
+import { ScrollView } from 'react-native';
 
 
 
@@ -39,7 +40,7 @@ export default function HomeScreen() {
       <Image 
         source={require('../assets/images/bgBooks.jpg')} 
         className="w-full absolute -top-5 opacity-3" 
-        style = {{height: 300}}
+        style = {{height: 220}}
       />
 
       <SafeAreaView className="flex-1">
@@ -65,7 +66,6 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </View>
         </View>
-
         
 
 
@@ -73,7 +73,14 @@ export default function HomeScreen() {
         <View>  
           <Categories activeCategory={selectedCategory} setActiveCategory={setSelectedCategory}/>
         </View>
-        <Books selectedCategory={selectedCategory} />
+        {/* <Books selectedCategory={selectedCategory} /> */}
+
+        <ScrollView>
+        <BooksReccomended />
+        <BooksRecent />
+        
+        <BooksFavourites />
+        </ScrollView>
 
 
         
@@ -97,3 +104,40 @@ export default function HomeScreen() {
     </View>
   );
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  innerContainer: {
+    padding: 20,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    alignSelf: 'center',
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+  bookContainer: {
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  author: {
+    fontSize: 16,
+  },
+  abstract: {
+    fontSize: 14,
+  },
+});
