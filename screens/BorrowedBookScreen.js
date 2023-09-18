@@ -9,7 +9,7 @@ import BookCard from '../components/BookCard';
 
 
 
-const ReservedBookScreen = () => {
+const BorrowedBookScreen = () => {
   const navigation = useNavigation();
   const [reservedList, setReservedList] = useState(bookItems.filter((book) => book.reserved));
 
@@ -23,7 +23,7 @@ const ReservedBookScreen = () => {
   const renderItem = ({ item }) => (
     <BookCard
         book={item}
-        showRemoveButton={true} // Pass true to show the remove button
+        showRemoveButton={false} // Pass true to show the remove button
         onRemovePress={() => handleRemoveFromReservedList(item.id)}
     />
   );
@@ -99,5 +99,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ReservedBookScreen;
+export default BorrowedBookScreen;
 
