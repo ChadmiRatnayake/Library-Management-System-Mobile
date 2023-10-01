@@ -6,7 +6,7 @@ import { bookItems } from '../constants'; // Import your book data
 import { SafeAreaView } from 'react-native';
 import { ScrollView } from 'react-native';
 import BookCard from '../components/BookCard';
-import Books from '../components/Books';
+import Books from './BooksScreen';
 
 
 function SearchScreen() {

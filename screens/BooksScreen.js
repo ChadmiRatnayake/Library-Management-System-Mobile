@@ -4,8 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
-import BookDetails from './BookDetails';
-import BooksHorizontal from './BooksHorizontal';
+import BookDetailsScreen from './BookDetailsScreen';
+import BooksHorizontal from '../components/BooksHorizontal';
 import { categoryData, bookItems } from '../constants'; // Import dummy data
 
 const windowWidth = Dimensions.get('window').width;
@@ -16,7 +16,7 @@ export default function Books() {
   const renderBookItem = ({ item }) => (
     <TouchableOpacity
       style={styles.bookItem}
-      onPress={() => navigation.navigate('BookDetails', { book: item })} // Pass book data to BookDetails screen
+      onPress={() => navigation.navigate('BookDetailsScreen', { book: item })} // Pass book data to BookDetailsScreen screen
     >
       <View style={styles.bookImageContainer}>
         <Image source={item.coverPage} style={styles.bookImage} />
@@ -59,7 +59,7 @@ export const BooksRecent = () => {
   return <BooksHorizontal title="Trending" data={bookItems} />;
 }
 
-export const BooksReccomended = () => {
+export const BooksRecommended = () => {
   return <BooksHorizontal title="For You" data={bookItems} />;
 }
 

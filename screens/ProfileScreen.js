@@ -13,13 +13,13 @@ import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native';
 
 
-const UserScreen = () => { 
+const ProfileScreen = () => { 
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
       <View style={styles.userInfoSection}>
-        <View style={{flexDirection: 'row', marginTop: 15}}>
+        <View style={{flexDirection: 'row', marginTop: 25}}>
           <Avatar.Image 
             source={
               require('../assets/images/profilePic.png')
@@ -121,7 +121,7 @@ const UserScreen = () => {
   );
 };
 
-export default UserScreen;
+export default ProfileScreen;
 
 const styles = StyleSheet.create({
   container: {

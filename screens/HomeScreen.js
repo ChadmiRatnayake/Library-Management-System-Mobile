@@ -9,7 +9,7 @@ import Carousel from 'react-native-snap-carousel';
 import Categories from '../components/Categories'
 //import BookCard from '../components/BookCard';
 import axios from 'axios';
-import Books, { BooksFavourites, BooksReccomended, BooksRecent } from '../components/Books';
+import Books, { BooksFavourites, BooksRecommended, BooksRecent } from './BooksScreen';
 import { useNavigation } from '@react-navigation/native'
 import { ScrollView } from 'react-native';
 
@@ -76,7 +76,7 @@ export default function HomeScreen() {
         {/* <Books selectedCategory={selectedCategory} /> */}
 
         <ScrollView>
-        <BooksReccomended />
+        <BooksRecommended />
         <BooksRecent />
         
         <BooksFavourites />
