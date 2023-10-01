@@ -7,24 +7,6 @@ import { themeColors } from '../theme';
 import { useNavigation } from '@react-navigation/native';
 import { Alert } from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1, 
-    backgroundColor: themeColors.bg,
-  },
-  contentContainer: {
-    flex: 1,
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
-    backgroundColor: 'white',
-    marginTop: 30,
-    paddingHorizontal: 16,
-    paddingTop: 44, // Adjust the top padding to reduce the height
-  },
-  
-});
-
-
 
 export default function LoginScreen() {
   const [name, setName] = useState('');
@@ -32,21 +14,19 @@ export default function LoginScreen() {
   const navigation = useNavigation();
   
 
- 
-
-
 
   const handleLogin = async () => {
     try {
       console.log(JSON.stringify({ name, password }));
-      const response = await fetch('http://10.10.29.152:8080/api/users/login', {
+      const response = await fetch('http://192.168.8.185:8080/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ name, password }),
       });
-        if(response.status === 201){
+      console.log(response.status);
+        if(response.status === 200){
           navigation.navigate('Library');
           console.log('Login Success:', response);
           //Alert.alert('Login Success');
@@ -124,3 +104,21 @@ export default function LoginScreen() {
   );
 }
 
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, 
+    backgroundColor: themeColors.bg,
+  },
+  contentContainer: {
+    flex: 1,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    backgroundColor: 'white',
+    marginTop: 30,
+    paddingHorizontal: 16,
+    paddingTop: 44, // Adjust the top padding to reduce the height
+  },
+  
+});

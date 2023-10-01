@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 8,
   },
-  bookDetails: {
+  BookDetailsScreen: {
     marginLeft: 16,
     flex: 1,
   },

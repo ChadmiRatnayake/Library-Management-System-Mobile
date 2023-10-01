@@ -20,7 +20,7 @@ const BooksHorizontal = ({ title, data }) => {
             return (
                 <TouchableOpacity
                     style={styles.bookItemHorizontal}
-                    onPress={() => navigation.navigate('BookDetails', { book: item })}
+                    onPress={() => navigation.navigate('BookDetailsScreen', { book: item })}
                 >
                     <View style={styles.bookImageContainerHorizontal}>
                         <Image source={item.coverPage} style={styles.bookImageHorizontal} />

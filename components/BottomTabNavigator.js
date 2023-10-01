@@ -3,7 +3,7 @@ import {useTheme} from 'react-native-paper';
 import {createStackNavigator} from '@react-navigation/stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/HomeScreen";
-import UserScreen from "../screens/ProfileScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import LoginScreen from "../screens/LoginScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
@@ -64,7 +64,7 @@ const ProfileStackScreen = ({navigation}) => {
     <ProfileStack.Navigator>
       <ProfileStack.Screen
         name="Profile"
-        component={UserScreen}
+        component={ProfileScreen}
         options={{
           title: 'Profile',
           headerLeft: null,
