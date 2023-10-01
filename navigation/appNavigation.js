@@ -8,11 +8,14 @@ import LoginScreen from '../screens/LoginScreen';
 
 import ProfileScreen from '../screens/ProfileScreen';
 import BookDetailsScreen from '../screens/BookDetailsScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import BookDetailsScreen from '../screens/BookDetailsScreen';
 import HomeScreen from '../screens/HomeScreen';
 import WishlistScreen from '../screens/WishlistScreen';
 import BottomTabNavigator from '../components/BottomTabNavigator';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
+import Books from '../screens/BooksScreen';
 import Books from '../screens/BooksScreen';
 import ReservedBookScreen from '../screens/ReservedBookScreen';
 import BorrowedBookScreen from '../screens/BorrowedBookScreen';
@@ -31,11 +34,15 @@ export default function AppNavigation() {
         <Stack.Screen name="Login" options={{headerShown: false}} component={LoginScreen} />
         <Stack.Screen name="UserProfile" options={{headerShown: false}} component={ProfileScreen} />
         <Stack.Screen name="BookDetailsScreen" options={{headerShown: false}} component={BookDetailsScreen} />
+        <Stack.Screen name="UserProfile" options={{headerShown: false}} component={ProfileScreen} />
+        <Stack.Screen name="BookDetailsScreen" options={{headerShown: false}} component={BookDetailsScreen} />
         <Stack.Screen name="Wishlist" options={{headerShown: false}} component={WishlistScreen} />
         <Stack.Screen name="EditProfile" options={{headerShown: true}} component={EditProfileScreen} />
         <Stack.Screen name="Recents" options={{headerShown: true}} component={Books} />
         <Stack.Screen name="Reserved Books" options={{headerShown: true}} component={ReservedBookScreen} />
-        <Stack.Screen name="Borrowed Books" options={{headerShown: true}} component={BorrowedBookScreen} />      
+        <Stack.Screen name="Borrowed Books" options={{headerShown: true}} component={BorrowedBookScreen} />
+        
+        
         <Stack.Screen name="Notifications" options={{headerShown: true}} component={NotificationsScreen} />
         
       </Stack.Navigator>
