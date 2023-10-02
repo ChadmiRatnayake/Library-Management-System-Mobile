@@ -9,37 +9,37 @@ import BookCard from '../components/BookCard';
 
 
 
-const WishlistScreen = () => {
+const BorrowedBookScreen = () => {
   const navigation = useNavigation();
-  const [wishlist, setWishlist] = useState(bookItems.filter((book) => book.inWishlist));
+  const [reservedList, setReservedList] = useState(bookItems.filter((book) => book.reserved));
 
-  const handleRemoveFromWishlist = (bookId) => {
-    // Remove the book from the wishlist based on its ID
-    const updatedWishlist = wishlist.filter((book) => book.id !== bookId);
-    setWishlist(updatedWishlist);
+  const handleRemoveFromReservedList = (bookId) => {
+    // Remove the book from the reservedList based on its ID
+    const updatedReservedList = reservedList.filter((book) => book.id !== bookId);
+    setReservedList(updatedReservedList);
   };
 
-  // Render each book item in the wishlist
+  // Render each book item in the reservedList
   const renderItem = ({ item }) => (
     <BookCard
         book={item}
-        showRemoveButton={true} // Pass true to show the remove button
-        onRemovePress={() => handleRemoveFromWishlist(item.id)}
+        showRemoveButton={false} // Pass true to show the remove button
+        onRemovePress={() => handleRemoveFromReservedList(item.id)}
     />
   );
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity
+      {/* <TouchableOpacity
           style={styles.goBackButton}
           onPress={() => navigation.goBack()}
         >
           <FontAwesomeIcon icon={faArrowLeft} size={20} color="black" />
       </TouchableOpacity>
 
-      <Text style={styles.header}>Wishlist</Text>
+      <Text style={styles.header}>Reserved Books</Text> */}
       <FlatList
-        data={wishlist}
+        data={reservedList}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
@@ -99,5 +99,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WishlistScreen;
+export default BorrowedBookScreen;
 

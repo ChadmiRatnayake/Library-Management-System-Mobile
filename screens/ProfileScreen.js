@@ -10,15 +10,16 @@ import {
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native'
+import { TouchableOpacity } from 'react-native';
 
 
-const UserScreen = () => { 
+const ProfileScreen = () => { 
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
       <View style={styles.userInfoSection}>
-        <View style={{flexDirection: 'row', marginTop: 15}}>
+        <View style={{flexDirection: 'row', marginTop: 25}}>
           <Avatar.Image 
             source={
               require('../assets/images/profilePic.png')
@@ -51,18 +52,28 @@ const UserScreen = () => {
       </View>
 
       <View style={styles.infoBoxWrapper}>
-          <View style={[styles.infoBox, {
+      <TouchableOpacity
+        style={[
+          styles.infoBox,
+          {
             borderRightColor: '#dddddd',
-            borderRightWidth: 1
-          }]}>
-            <Title>2</Title>
-            <Caption>Reserved Books</Caption>
-          </View>
-          <View style={styles.infoBox}>
-            <Title>3</Title>
-            <Caption>Borrowed Books</Caption>
-          </View>
-      </View>
+            borderRightWidth: 1,
+          },
+        ]}
+        onPress={() => navigation.navigate('Reserved Books')} // Pass the infoType as a parameter
+      >
+        <Text>2</Text>
+        <Text>Reserved Books</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.infoBox}
+        onPress={() => navigation.navigate('Borrowed Books')} // Pass the infoType as a parameter
+      >
+        <Text>3</Text>
+        <Text>Borrowed Books</Text>
+      </TouchableOpacity>
+    </View>
 
       <View style={styles.menuWrapper}>
         <TouchableRipple onPress={()=> navigation.navigate('Wishlist')}>
@@ -71,18 +82,18 @@ const UserScreen = () => {
             <Text style={styles.menuItemText}>Your Wishlist</Text>
           </View>
         </TouchableRipple>
-        <TouchableRipple onPress={() => {}}>
+        {/* <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
             <Icon name="cart" color="#FF6347" size={25}/>
             <Text style={styles.menuItemText}>Reserved Books</Text>
           </View>
-        </TouchableRipple>
-        <TouchableRipple onPress={() => {}}>
+        </TouchableRipple> */}
+        {/* <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
             <Icon name="book" color="#FF6347" size={25}/>
             <Text style={styles.menuItemText}>Currently Borrowed Books</Text>
           </View>
-        </TouchableRipple>
+        </TouchableRipple> */}
         <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
             <Icon name="book" color="#FF6347" size={25}/>
@@ -92,7 +103,13 @@ const UserScreen = () => {
         <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
             <Icon name="credit-card" color="#FF6347" size={25}/>
-            <Text style={styles.menuItemText}>Payment</Text>
+            <Text style={styles.menuItemText}>Overdue Charges</Text>
+          </View>
+        </TouchableRipple>
+        <TouchableRipple onPress={() => navigation.navigate('Welcome')}>
+          <View style={styles.menuItem}>
+            <Icon name="account" color="#FF6347" size={25}/>
+            <Text style={styles.menuItemText}>Logout</Text>
           </View>
         </TouchableRipple>
         
@@ -104,7 +121,7 @@ const UserScreen = () => {
   );
 };
 
-export default UserScreen;
+export default ProfileScreen;
 
 const styles = StyleSheet.create({
   container: {

@@ -7,7 +7,7 @@ import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { faArrowLeft, faCheck, faTimes  } from '@fortawesome/free-solid-svg-icons';
 
-export default function BookDetails({ route }) {
+export default function BookDetailsScreen({ route }) {
   const { book } = route.params;
   const navigation = useNavigation();
 
@@ -66,7 +66,7 @@ export default function BookDetails({ route }) {
             <TouchableOpacity
               style={styles.iconTextContainer}
               onPress={handleWishlistToggle}
-              disabled={bookReserved || bookBorrowed}
+              // disabled={bookReserved || bookBorrowed}
             >
               <View style={styles.iconContainer}>
                 <FontAwesomeIcon

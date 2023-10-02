@@ -6,6 +6,7 @@ import { bookItems } from '../constants'; // Import your book data
 import { SafeAreaView } from 'react-native';
 import { ScrollView } from 'react-native';
 import BookCard from '../components/BookCard';
+import Books from './BooksScreen';
 
 
 function SearchScreen() {
@@ -32,7 +33,7 @@ function SearchScreen() {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.innerContainer}>
-          <Text style={styles.header}>Welcome to the Library</Text>
+          <Text style={styles.header}>Search Books</Text>
           <TextInput
             style={styles.input}
             onChange={() => handleSearch()}
@@ -41,6 +42,7 @@ function SearchScreen() {
             onChangeText={text => setSearchTerm(text)}
           />
           <Button title="Search" onPress={handleSearch} />
+
 
           {searchResults.map((book) => (
             <BookCard
@@ -67,6 +69,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    alignSelf: 'center',
   },
   input: {
     height: 40,

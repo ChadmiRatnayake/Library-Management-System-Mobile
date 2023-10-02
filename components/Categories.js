@@ -30,7 +30,7 @@ export default function Categories() {
 
           return (
             <TouchableOpacity
-              onPress={() => handleCategoryPress(item.id)} // Pass the category ID
+              onPress={() => navigation.navigate('Adventurous Books')} // Pass the category ID
               style={[containerStyles, { padding: 8, paddingHorizontal: 20, marginRight: 10, borderRadius: 999, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5 }]}
             >
               <Text style={[{ fontWeight: 'bold' }, activeTextStyles]}>

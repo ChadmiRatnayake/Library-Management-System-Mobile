@@ -1,22 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, Image, FlatList, StyleSheet, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
-import { themeColors } from '../theme';
-import { bookItems } from '../constants'; // Import dummy data
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+import BookDetailsScreen from './BookDetailsScreen';
+import BooksHorizontal from '../components/BooksHorizontal';
+import { categoryData, bookItems } from '../constants'; // Import dummy data
 
 const windowWidth = Dimensions.get('window').width;
 
 export default function Books() {
   const navigation = useNavigation();
 
-
-  
-
   const renderBookItem = ({ item }) => (
     <TouchableOpacity
       style={styles.bookItem}
-      onPress={() => navigation.navigate('BookDetails', { book: item })} // Pass book data to BookDetails screen
+      onPress={() => navigation.navigate('BookDetailsScreen', { book: item })} // Pass book data to BookDetailsScreen screen
     >
       <View style={styles.bookImageContainer}>
         <Image source={item.coverPage} style={styles.bookImage} />
@@ -28,47 +28,64 @@ export default function Books() {
   );
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.safeAreaContainer}>
 
-        <Text style={styles.title}>
-          All Books
-        </Text>
+    
+
+    <View style={styles.container}>
+
+      
+      <View style={styles.safeAreaContainer}>
+
+        {/* <Text style={styles.title}>
+          Recents
+        </Text> */}
 
         <FlatList
-          data={bookItems} // Use the filtered books
+          data={bookItems}
           keyExtractor={(item) => item.id}
           renderItem={renderBookItem}
           numColumns={2}
           columnWrapperStyle={styles.columnWrapper}
         />
 
+      </View>
 
-
-      </SafeAreaView>
-      
     </View>
+    
   );
 }
+
+export const BooksRecent = () => {
+  return <BooksHorizontal title="Trending" data={bookItems} />;
+}
+
+export const BooksRecommended = () => {
+  return <BooksHorizontal title="For You" data={bookItems} />;
+}
+
+export const BooksFavourites = () => {
+  return <BooksHorizontal title="New Arrivals" data={bookItems} />;
+}
+
+
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+
   },
   safeAreaContainer: {
     flex: 1,
-    paddingTop: -10,
-    paddingLeft: 16,
-    paddingRight: 16,
-    
+    padding: 16,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'gray',
-    marginBottom: 16,
-  },
+  // title: {
+  //   fontSize: 24,
+  //   fontWeight: 'bold',
+  //   color: 'gray',
+  //   marginBottom: 16,
+  // },
   columnWrapper: {
     justifyContent: 'space-between',
   },
@@ -107,9 +124,5 @@ const styles = StyleSheet.create({
   bottomText: {
     fontWeight: 'bold',
   },
-  loginText: {
-    color: '#3da749',
-    fontWeight: 'bold',
-    marginLeft: 4,
-  },
+  
 });

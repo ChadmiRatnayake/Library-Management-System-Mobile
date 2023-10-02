@@ -30,14 +30,14 @@ const ReservedBookScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity
+      {/* <TouchableOpacity
           style={styles.goBackButton}
           onPress={() => navigation.goBack()}
         >
           <FontAwesomeIcon icon={faArrowLeft} size={20} color="black" />
       </TouchableOpacity>
 
-      <Text style={styles.header}>Wishlist</Text>
+      <Text style={styles.header}>Reserved Books</Text> */}
       <FlatList
         data={reservedList}
         renderItem={renderItem}
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 8,
   },
-  bookDetails: {
+  BookDetailsScreen: {
     marginLeft: 16,
     flex: 1,
   },

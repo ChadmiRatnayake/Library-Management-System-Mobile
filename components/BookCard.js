@@ -20,6 +20,7 @@ const BookCard = ({ book, showRemoveButton, onRemovePress, onPress }) => {
             <Text style={styles.removeButtonText}>Remove</Text>
           </TouchableOpacity>
         )}
+        
       </View>
     </TouchableOpacity>
   );
