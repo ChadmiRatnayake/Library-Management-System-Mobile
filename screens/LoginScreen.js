@@ -6,6 +6,7 @@ import { ArrowLeftIcon } from 'react-native-heroicons/solid';
 import { themeColors } from '../theme';
 import { useNavigation } from '@react-navigation/native';
 import { Alert } from 'react-native';
+import { config } from "../configurations/config";
 
 
 export default function LoginScreen() {
@@ -17,35 +18,41 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     try {
-      console.log(JSON.stringify({ name, password }));
-      const response = await fetch('http://192.168.8.185:8080/api/users/login', {
+      console.log(name, password);
+    
+      const response = await fetch(`${config.url}/api/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ name, password }),
       });
-      console.log(response.status);
-        if(response.status === 200){
-          navigation.navigate('Library');
-          console.log('Login Success:', response);
-          //Alert.alert('Login Success');
-        }
-        else{
-          Alert.alert('Login Failed');
-        }
-       
-
+    
+      console.log('Response Status:', response.status);
+    
+      if (response.status === 200) {
+        console.log('Login Success:', response);
+        Alert.alert('Login Success');
+        navigation.navigate('Library');
+      } else if (response.status === 404) {
+        console.log('Login Failed: Resource not found');
+        Alert.alert('Login Failed: Resource not found');
+      } else {
+        console.log('Login Failed: Unexpected error');
+        Alert.alert('Login Failed: Unexpected error');
+      }
     } catch (error) {
       console.error('Network Error:', error);
+      Alert.alert('Network Error: ' + error.message);
     }
+    
   };
   
 
   return (
     <View style={styles.container}>
       <SafeAreaView style={{ flex: 0 }}>
-        <View style={{ flexDirection: 'row', justifyContent: 'start' }}>
+        <View style={{ flexDirection: 'row', justifyContent:'flex-start' }}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
             style={{

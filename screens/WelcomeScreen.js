@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     flexDirection: 'row',
-    //justifyContent: 'center',
+    justifyContent: 'center',
   },
   logoImage: {
     width: 350,
