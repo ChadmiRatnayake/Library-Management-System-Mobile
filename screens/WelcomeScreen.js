@@ -43,28 +43,10 @@ import { themeColors } from '../theme'
 import { useNavigation } from '@react-navigation/native'
 
 
-
 export default function WelcomeScreen() {
   const navigation = useNavigation();
 
-  const navigation = useNavigation();
-
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.contentContainer}>
-        <Text style={styles.title}>Let's Get Started!</Text>
-        <View style={styles.logoContainer}>
-          <Image source={require("../assets/images/logo.png")} style={styles.logoImage} />
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Login')}
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>Get Started</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
     <SafeAreaView style={styles.container}>
       <View style={styles.contentContainer}>
         <Text style={styles.title}>Let's Get Started!</Text>

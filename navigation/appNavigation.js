@@ -3,19 +3,16 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
 import WelcomeScreen from '../screens/WelcomeScreen';
 import LoginScreen from '../screens/LoginScreen';
-
 import ProfileScreen from '../screens/ProfileScreen';
 import BookDetailsScreen from '../screens/BookDetailsScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import BookDetailsScreen from '../screens/BookDetailsScreen';
-import HomeScreen from '../screens/HomeScreen';
 import WishlistScreen from '../screens/WishlistScreen';
-import BottomTabNavigator from '../components/BottomTabNavigator';
+import BottomTabNavigator from './BottomTabNavigator';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
-import Books from '../screens/BooksScreen';
 import Books from '../screens/BooksScreen';
 import ReservedBookScreen from '../screens/ReservedBookScreen';
 import BorrowedBookScreen from '../screens/BorrowedBookScreen';
@@ -32,8 +29,6 @@ export default function AppNavigation() {
         <Stack.Screen name="Library" options={{headerShown: false}} component={BottomTabNavigator} />
         <Stack.Screen name="Welcome" options={{headerShown: false}} component={WelcomeScreen} />
         <Stack.Screen name="Login" options={{headerShown: false}} component={LoginScreen} />
-        <Stack.Screen name="UserProfile" options={{headerShown: false}} component={ProfileScreen} />
-        <Stack.Screen name="BookDetailsScreen" options={{headerShown: false}} component={BookDetailsScreen} />
         <Stack.Screen name="UserProfile" options={{headerShown: false}} component={ProfileScreen} />
         <Stack.Screen name="BookDetailsScreen" options={{headerShown: false}} component={BookDetailsScreen} />
         <Stack.Screen name="Wishlist" options={{headerShown: false}} component={WishlistScreen} />

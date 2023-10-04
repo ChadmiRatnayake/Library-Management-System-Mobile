@@ -13,7 +13,6 @@ export default function LoginScreen() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
-  
 
 
   const handleLogin = async () => {
@@ -30,7 +29,7 @@ export default function LoginScreen() {
     
       console.log('Response Status:', response.status);
     
-      if (response.status === 200) {
+      if (response.status === 201) {
         console.log('Login Success:', response);
         Alert.alert('Login Success');
         navigation.navigate('Library');
