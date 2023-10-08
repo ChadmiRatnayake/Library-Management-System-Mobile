@@ -56,15 +56,16 @@ export default function Books() {
 }
 
 export const BooksRecent = () => {
-  return <BooksHorizontal title="Trending" data={bookItems} />;
+  return <BooksHorizontal title="Trending"/>;
 }
 
 export const BooksRecommended = () => {
-  return <BooksHorizontal title="For You" data={bookItems} />;
+  // return <BooksHorizontal title="For You" data={bookItems} />;
+  return <BooksHorizontal title="For You" />;
 }
 
 export const BooksFavourites = () => {
-  return <BooksHorizontal title="New Arrivals" data={bookItems} />;
+  return <BooksHorizontal title="New Arrivals" />;
 }
 
 

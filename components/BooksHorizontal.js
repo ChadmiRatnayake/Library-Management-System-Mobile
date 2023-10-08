@@ -1,23 +1,42 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Image, StyleSheet, Dimensions, FlatList } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-
-
+import { fetchBooks } from "../services/BooksController";
 
 const windowWidth = Dimensions.get('window').width;
 
-const BooksHorizontal = ({ title, data }) => {
+const BooksHorizontal = ({ title }) => {
     const navigation = useNavigation();
+    const [bookData, setBookData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     const onArrowPress = () => {
         navigation.navigate('SearchScreen');
     };
 
+    useEffect(() => {
+        // Call the fetchBooks function to fetch book data
+        fetchBooks()
+          .then((data) => {
+            setBookData(data);
+            setLoading(false);
+          })
+          .catch((error) => {
+            setError(error);
+            setLoading(false);
+          });
+      }, []);
+    
+
+
     const renderBookItem = ({ item, index }) => {
-        if (index < 4) {
+        if (index < 4) { 
+            //console.log(item.url);
             return (
+                
                 <TouchableOpacity
                     style={styles.bookItemHorizontal}
                     onPress={() => navigation.navigate('BookDetailsScreen', { book: item })}
@@ -30,7 +49,7 @@ const BooksHorizontal = ({ title, data }) => {
                     </Text>
                 </TouchableOpacity>
             );
-        } else if (index === 4) {
+        } else if (index === 4) { 
             return (
                 <TouchableOpacity
                     style={styles.seeMoreContainer}
@@ -42,6 +61,17 @@ const BooksHorizontal = ({ title, data }) => {
             );
         }
     };
+    
+
+
+    if (loading) {
+        return <Text>Loading...</Text>;
+    }
+
+    if (error) {
+        return <Text>Error: {error.message}</Text>;
+    }
+
 
     return (
         <View style={styles.containerHorizontal}>
@@ -49,14 +79,13 @@ const BooksHorizontal = ({ title, data }) => {
                 <Text style={styles.titleHorizontal}>
                     {title}
                 </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Recents') } style={styles.arrowContainer}>
-                    {/* <FontAwesomeIcon icon={faArrowRight} size={20} color="black" /> */}
+                <TouchableOpacity onPress={() => navigation.navigate('Recents')} style={styles.arrowContainer}>
                     <Text style={styles.seeMoreText}>See More</Text>
                 </TouchableOpacity>
             </View>
             <FlatList
-                data={data}
-                keyExtractor={(item) => item.id}
+                data={bookData}
+                keyExtractor={(item) => item.id.toString()}
                 renderItem={renderBookItem}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
@@ -100,7 +129,6 @@ const styles = StyleSheet.create({
     bookImageContainerHorizontal: {
         alignItems: 'center',
         padding: 8,
-
     },
     bookImageHorizontal: {
         width: windowWidth * 0.3,

@@ -29,7 +29,7 @@ export default function LoginScreen() {
     
       console.log('Response Status:', response.status);
     
-      if (response.status === 201) {
+      if (response.status === 200) {
         console.log('Login Success:', response);
         Alert.alert('Login Success');
         navigation.navigate('Library');
@@ -54,13 +54,7 @@ export default function LoginScreen() {
         <View style={{ flexDirection: 'row', justifyContent:'flex-start' }}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            style={{
-              backgroundColor: 'yellow',
-              padding: 12,
-              borderTopRightRadius: 20,
-              borderBottomLeftRadius: 20,
-              marginLeft: 4,
-            }}
+            style={styles.goBackButton}
           >
             <ArrowLeftIcon size={20} color="black" />
           </TouchableOpacity>
@@ -116,6 +110,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1, 
     backgroundColor: themeColors.bg,
+  },
+  goBackButton:{
+    backgroundColor: 'yellow',
+    padding: 12,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    marginLeft: 4,
   },
   contentContainer: {
     flex: 1,
