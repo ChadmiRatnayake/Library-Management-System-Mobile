@@ -3,14 +3,14 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
 import WelcomeScreen from '../screens/WelcomeScreen';
 import LoginScreen from '../screens/LoginScreen';
-
 import ProfileScreen from '../screens/ProfileScreen';
 import BookDetailsScreen from '../screens/BookDetailsScreen';
-import HomeScreen from '../screens/HomeScreen';
 import WishlistScreen from '../screens/WishlistScreen';
-import BottomTabNavigator from '../components/BottomTabNavigator';
+import BottomTabNavigator from './BottomTabNavigator';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import Books from '../screens/BooksScreen';
@@ -35,7 +35,9 @@ export default function AppNavigation() {
         <Stack.Screen name="EditProfile" options={{headerShown: true}} component={EditProfileScreen} />
         <Stack.Screen name="Recents" options={{headerShown: true}} component={Books} />
         <Stack.Screen name="Reserved Books" options={{headerShown: true}} component={ReservedBookScreen} />
-        <Stack.Screen name="Borrowed Books" options={{headerShown: true}} component={BorrowedBookScreen} />      
+        <Stack.Screen name="Borrowed Books" options={{headerShown: true}} component={BorrowedBookScreen} />
+        
+        
         <Stack.Screen name="Notifications" options={{headerShown: true}} component={NotificationsScreen} />
         
       </Stack.Navigator>

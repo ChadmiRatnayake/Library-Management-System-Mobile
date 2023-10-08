@@ -31,6 +31,10 @@ export default function HomeScreen() {
     const filtered = bookItems.filter((book) => book.category === selectedCategory);
     setFilteredBooks(filtered);
   }, [selectedCategory]);
+
+
+  
+
   
 
   return (

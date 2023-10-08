@@ -55,7 +55,7 @@ export default function BookDetailsScreen({ route }) {
 
           <Image source={book.coverPage} style={styles.bookImage} />
           <Text style={styles.bookTitle}>{book.title}</Text>
-
+          
           <View style={styles.availabilityContainer}>
             <Text style={styles.availabilityText}>
               Availability: {availabilityIcon}
