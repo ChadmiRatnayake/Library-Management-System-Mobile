@@ -34,7 +34,7 @@ const BooksHorizontal = ({ title }) => {
 
     const renderBookItem = ({ item, index }) => {
         if (index < 4) { 
-            //console.log(item.url);
+            console.log(item.url);
             return (
                 
                 <TouchableOpacity
@@ -42,19 +42,18 @@ const BooksHorizontal = ({ title }) => {
                     onPress={() => navigation.navigate('BookDetailsScreen', { book: item })}
                 >
                     <View style={styles.bookImageContainerHorizontal}>
-                        <Image source={item.coverPage} style={styles.bookImageHorizontal} />
+                        <Image source={{uri:item.url}} style={styles.bookImageHorizontal} />
                     </View>
                     <Text style={styles.bookTitleHorizontal}>
                         {item.title}
                     </Text>
                 </TouchableOpacity>
             );
-        } else if (index === 4) { 
+        } else if (index === 4){ 
             return (
                 <TouchableOpacity
                     style={styles.seeMoreContainer}
-                    onPress={() => navigation.navigate('Recents')}
-                >
+                    onPress={() => navigation.navigate('Recents')}>
                     <Text style={styles.seeMoreText}>See More</Text>
                     <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
                 </TouchableOpacity>
@@ -85,7 +84,7 @@ const BooksHorizontal = ({ title }) => {
             </View>
             <FlatList
                 data={bookData}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item) => item.bookid}
                 renderItem={renderBookItem}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
