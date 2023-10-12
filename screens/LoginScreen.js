@@ -28,7 +28,7 @@ export default function LoginScreen() {
       
       console.log('Response Status:', response.status);
     
-      if (response.status === 200) {
+      if (response.status === 200 || response.status === 201) {
         console.log('Login Success:',);
         SetAuth(response.headers.map['x-auth-token']);
         Alert.alert('Login Success');

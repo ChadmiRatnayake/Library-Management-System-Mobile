@@ -27,12 +27,9 @@ export default function Books() {
     </TouchableOpacity>
   );
 
-  return (
-
-    
+  return (    
 
     <View style={styles.container}>
-
       
       <View style={styles.safeAreaContainer}>
 
