@@ -18,4 +18,3 @@ const getAuth = async () => {
 }
 
 export { SetAuth, getAuth };
-

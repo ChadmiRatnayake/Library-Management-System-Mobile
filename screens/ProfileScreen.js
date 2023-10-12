@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, SafeAreaView, StyleSheet, ScrollView} from 'react-native';
 import {
   Avatar,
@@ -11,10 +11,30 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native';
+import {userDetails} from '../services/User';
 
 
 const ProfileScreen = () => { 
   const navigation = useNavigation();
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState(''); // Initialize with an empty string
+
+  useEffect(() => {
+    // Fetch user data here, e.g., using the fetchUserData function
+    userDetails()
+      .then(([name, email]) => {
+        if (name, email) {
+          setName(name);
+          setEmail(email); // Update the email state
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching user data:', error);
+      });
+  }, []); // The empty dependency array ensures this effect runs only once
+
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -31,7 +51,7 @@ const ProfileScreen = () => {
               marginTop:15,
               marginBottom: 5,
             }]}>John White</Title>
-            <Caption style={styles.caption}>@joeW</Caption>
+            <Caption style={styles.caption}>{name}</Caption>
           </View>
         </View>
       </View>
@@ -39,7 +59,7 @@ const ProfileScreen = () => {
       <View style={styles.userInfoSection}>
         <View style={styles.row}>
           <Icon name="email" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>john_white@gmail.com</Text>
+          <Text style={{color:"#777777", marginLeft: 20}}>{email}</Text>
         </View>
         <View style={styles.row}>
           <Icon name="map-marker-radius" color="#777777" size={20}/>

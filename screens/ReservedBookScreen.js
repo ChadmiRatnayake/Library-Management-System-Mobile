@@ -3,8 +3,8 @@ import { FlatList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import BookCard from '../components/BookCard';
-import { reservedlist } from '../services/BooksController';
-import { cancelReservation } from '../services/BooksController';
+import { reservedlist } from '../services/BooksServices';
+import { cancelReservation } from '../services/BooksServices';
 
 const ReservedBookScreen = () => {
   const navigation = useNavigation();
@@ -31,7 +31,7 @@ const ReservedBookScreen = () => {
       .then((data) => {
         setReservedList(data);
     
-        console.log(data);
+        //console.log(data);
       
       })
       .catch((error) => {

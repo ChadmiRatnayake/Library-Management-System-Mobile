@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { fetchBooks } from '../services/BooksController';
+import { fetchBooks } from '../services/BooksServices';
 
 const windowWidth = Dimensions.get('window').width;
 

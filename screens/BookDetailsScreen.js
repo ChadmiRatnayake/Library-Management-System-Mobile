@@ -6,7 +6,7 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { faArrowLeft, faCheck, faTimes  } from '@fortawesome/free-solid-svg-icons';
-import {reserve} from '../services/BooksController';
+import {reserve} from '../services/BooksServices';
 
 export default function BookDetailsScreen({ route }) {
   const navigation = useNavigation();
