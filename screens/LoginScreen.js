@@ -25,7 +25,7 @@ export default function LoginScreen() {
         },
         body: JSON.stringify({ name, password }),
       });
-    
+      
       console.log('Response Status:', response.status);
     
       if (response.status === 200 || response.status === 201) {
