@@ -1,47 +1,60 @@
-import React, { useState } from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import { bookItems } from '../constants'; // Import your dummy data
+import React, { useState, useEffect } from 'react';
+import { FlatList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import BookCard from '../components/BookCard';
-
-
+import { reservedlist } from '../services/BooksController';
+import { cancelReservation } from '../services/BooksController';
 
 const ReservedBookScreen = () => {
   const navigation = useNavigation();
-  const [reservedList, setReservedList] = useState(bookItems.filter((book) => book.reserved));
+  const [reservedList, setReservedList] = useState();
 
-  const handleRemoveFromReservedList = (bookId) => {
+
+  const handleRemoveFromReservedList = async (reservation_id) => {
+   
+    try{
+      await cancelReservation(reservation_id);
+      const updatedReservedList = reservedList.filter((reservation) => reservation.reservation_id !== reservation_id);
+      setReservedList(updatedReservedList);
+    }
+    catch(e){
+      console.log(e);
+    }
     // Remove the book from the reservedList based on its ID
-    const updatedReservedList = reservedList.filter((book) => book.id !== bookId);
-    setReservedList(updatedReservedList);
   };
 
+
+  useEffect(() => {
+    // Call the fetchBooks function to fetch book data
+    reservedlist()
+      .then((data) => {
+        setReservedList(data);
+    
+        console.log(data);
+      
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  },[])
+  
+
   // Render each book item in the reservedList
-  const renderItem = ({ item }) => (
+  const renderItem = ({ reservation }) => (
     <BookCard
-        book={item}
+        book={reservation.book}
         showRemoveButton={true} // Pass true to show the remove button
-        onRemovePress={() => handleRemoveFromReservedList(item.id)}
+        onRemovePress={() => handleRemoveFromReservedList(reservation.reservation_id)}
     />
   );
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <TouchableOpacity
-          style={styles.goBackButton}
-          onPress={() => navigation.goBack()}
-        >
-          <FontAwesomeIcon icon={faArrowLeft} size={20} color="black" />
-      </TouchableOpacity>
-
-      <Text style={styles.header}>Reserved Books</Text> */}
       <FlatList
         data={reservedList}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => renderItem({ reservation: item })}
+        keyExtractor={(item) => item.reservation_id}
       />
     </SafeAreaView>
   );
