@@ -37,8 +37,7 @@ export default function AppNavigation() {
         <Stack.Screen name="Recents" options={{headerShown: true}} component={DisplayBooks} />
         <Stack.Screen name="Reserved Books" options={{headerShown: true}} component={ReservedBookScreen} />
         <Stack.Screen name="Borrowed Books" options={{headerShown: true}} component={BorrowedBookScreen} />
-        
-        
+           
         <Stack.Screen name="Notifications" options={{headerShown: true}} component={NotificationsScreen} />
         
       </Stack.Navigator>

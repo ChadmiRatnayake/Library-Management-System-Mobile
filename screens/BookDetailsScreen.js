@@ -6,41 +6,30 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { faArrowLeft, faCheck, faTimes  } from '@fortawesome/free-solid-svg-icons';
+import {reserve} from '../services/BooksController';
 
 export default function BookDetailsScreen({ route }) {
-  const { book } = route.params;
   const navigation = useNavigation();
+  const [book, setBook] = useState(route.params.book);
+  const [wishlisted, setWishlisted] = useState(!book.status);
+  const [bookReserved, setBookReserved] = useState(!book.status);
 
-  const [wishlisted, setWishlisted] = useState(false);
-  const [reserved, setReserved] = useState(false);
-  const [bookReserved, setBookReserved] = useState(false);
-  const [bookBorrowed, setBookBorrowed] = useState(false);
 
-  useEffect(() => {
-    setBookReserved(book.reserved);
-    setBookBorrowed(book.borrowed);
-  }, [book]);
-
-  const availabilityIcon = book.available ? (
+  const availabilityIcon = !bookReserved ? (
     <FontAwesomeIcon icon={faCheck} size={20} color="green" />
   ) : (
     <FontAwesomeIcon icon={faTimes} size={20} color="red" />
   );
 
   const handleWishlistToggle = () => {
-    if (!bookReserved && !bookBorrowed) {
-      setWishlisted(!wishlisted);
-    }
+ 
   };
 
-  const handleReserveToggle = () => {
-    if (!bookBorrowed) {
-      if (!bookReserved) {
-        setReserved(!reserved);
-      }
-      setBookReserved(!bookReserved);
-    }
-  };
+  const handleReserve = async() => {
+        console.log(book);
+        setBookReserved(true)
+        await reserve(book.bookid);
+ };
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
@@ -82,14 +71,14 @@ export default function BookDetailsScreen({ route }) {
 
             <TouchableOpacity
               style={styles.iconTextContainer}
-              onPress={handleReserveToggle}
-              disabled={bookBorrowed}
+              onPress={handleReserve}
+              disabled={bookReserved}
             >
               <View style={styles.iconContainer}>
                 <FontAwesomeIcon
                   icon={faShoppingBag}
                   size={24}
-                  color={book.reserved ? 'gray' : 'green'}
+                  color={bookReserved ? 'gray' : 'green'}
                 />
               </View>
               <Text style={styles.buttonText}>
@@ -175,6 +164,7 @@ const styles = StyleSheet.create({
   },
   iconTextContainer: {
     alignItems: 'center',
+
   },
   iconContainer: {
     flexDirection: 'row',
@@ -182,6 +172,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
+    minWidth: 120,
     marginTop: 4,
+    textAlign: 'center',
   },
 });

@@ -5,12 +5,11 @@ const BookCard = ({ book, showRemoveButton, onRemovePress, onPress }) => {
   return (
     <TouchableOpacity onPress={() => onPress(book)}>
       <View style={styles.bookItem}>
-        <Image source={book.coverPage} style={styles.bookImage} />
+        <Image source={{uri:book.url}} style={styles.bookImage} />
         <View style={styles.bookCard}>
           <Text style={styles.bookTitle}>{book.title}</Text>
           <Text style={styles.bookCategory}>Category: {book.category}</Text>
           <Text style={styles.bookAuthor}>Author: {book.author}</Text>
-          <Text style={styles.bookLanguage}>Language: {book.language}</Text>
         </View>
         {showRemoveButton && (
           <TouchableOpacity
@@ -42,17 +41,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   bookTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
   },
   bookCategory: {
-    fontSize: 16,
+    fontSize: 14,
   },
   bookAuthor: {
-    fontSize: 16,
+    fontSize: 14,
   },
   bookLanguage: {
-    fontSize: 16,
+    fontSize: 14,
   },
   removeButton: {
     backgroundColor: 'red',

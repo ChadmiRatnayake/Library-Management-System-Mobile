@@ -7,7 +7,7 @@ import { themeColors } from '../theme';
 import { useNavigation } from '@react-navigation/native';
 import { Alert } from 'react-native';
 import { config } from "../configurations/config";
-
+import { SetAuth } from '../services/Authentication';
 
 export default function LoginScreen() {
   const [name, setName] = useState('');
@@ -17,7 +17,6 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     try {
-      console.log(name, password);
     
       const response = await fetch(`${config.url}/api/users/login`, {
         method: 'POST',
@@ -30,7 +29,8 @@ export default function LoginScreen() {
       console.log('Response Status:', response.status);
     
       if (response.status === 200 || response.status === 201) {
-        console.log('Login Success:', response);
+        console.log('Login Success:',);
+        SetAuth(response.headers.map['x-auth-token']);
         Alert.alert('Login Success');
         navigation.navigate('Library');
       } else if (response.status === 404) {
