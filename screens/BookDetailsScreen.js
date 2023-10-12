@@ -9,16 +9,11 @@ import { faArrowLeft, faCheck, faTimes  } from '@fortawesome/free-solid-svg-icon
 import {reserve} from '../services/BooksController';
 
 export default function BookDetailsScreen({ route }) {
-  const { book } = route.params;
   const navigation = useNavigation();
-  const [wishlisted, setWishlisted] = useState(false);
-  const [bookReserved, setBookReserved] = useState(false);
-  const [bookBorrowed, setBookBorrowed] = useState(false);
+  const [book, setBook] = useState(route.params.book);
+  const [wishlisted, setWishlisted] = useState(!book.status);
+  const [bookReserved, setBookReserved] = useState(!book.status);
 
-  useEffect(() => {
-    setBookReserved(book.status);
-    setBookBorrowed(book.status);
-  }, [book]);
 
   const availabilityIcon = !bookReserved ? (
     <FontAwesomeIcon icon={faCheck} size={20} color="green" />
@@ -27,13 +22,12 @@ export default function BookDetailsScreen({ route }) {
   );
 
   const handleWishlistToggle = () => {
-    if (!bookReserved && !bookBorrowed) {
-      setWishlisted(!wishlisted);
-    }
+ 
   };
 
   const handleReserve = async() => {
-        console.log(book.bookid);
+        console.log(book);
+        setBookReserved(true)
         await reserve(book.bookid);
  };
 

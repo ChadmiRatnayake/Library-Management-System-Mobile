@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Image, StyleSheet, Dimensions, FlatList } from "react-native";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { fetchBooks } from "../services/BooksController";
@@ -9,27 +9,30 @@ const windowWidth = Dimensions.get('window').width;
 
 const BooksHorizontal = ({ title }) => {
     const navigation = useNavigation();
+    const isFocused = useIsFocused(); // Check if the screen is focused
     const [bookData, setBookData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const onArrowPress = () => {
-        navigation.navigate('SearchScreen');
+    const fetchBookData = () => {
+        fetchBooks()
+            .then((data) => {
+                setBookData(data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                setError(error);
+                setLoading(false);
+            });
     };
 
     useEffect(() => {
-        // Call the fetchBooks function to fetch book data
-        fetchBooks()
-          .then((data) => {
-            setBookData(data);
-            setLoading(false);
-          })
-          .catch((error) => {
-            setError(error);
-            setLoading(false);
-          });
-      }, []);
-    
+        if (isFocused) {
+            // Fetch data when the screen is focused
+            fetchBookData();
+        }
+    }, [isFocused]);
+
 
 
     const renderBookItem = ({ item, index }) => {
