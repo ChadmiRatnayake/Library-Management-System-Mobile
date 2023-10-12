@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, SafeAreaView, StyleSheet, ScrollView} from 'react-native';
+import { View, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import {
   Avatar,
   Title,
@@ -11,111 +11,115 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native';
+import { logout } from '../services/Authentication';
+import { getAuth } from '../services/Authentication';
 
-
-const ProfileScreen = () => { 
+const ProfileScreen = () => {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-      <View style={styles.userInfoSection}>
-        <View style={{flexDirection: 'row', marginTop: 25}}>
-          <Avatar.Image 
-            source={
-              require('../assets/images/profilePic.png')
-            }
-            size={80}
-          />
-          <View style={{marginLeft: 20}}>
-            <Title style={[styles.title, {
-              marginTop:15,
-              marginBottom: 5,
-            }]}>John White</Title>
-            <Caption style={styles.caption}>@joeW</Caption>
+        <View style={styles.userInfoSection}>
+          <View style={{ flexDirection: 'row', marginTop: 25 }}>
+            <Avatar.Image
+              source={
+                require('../assets/images/profilePic.png')
+              }
+              size={80}
+            />
+            <View style={{ marginLeft: 20 }}>
+              <Title style={[styles.title, {
+                marginTop: 15,
+                marginBottom: 5,
+              }]}>John White</Title>
+              <Caption style={styles.caption}>@joeW</Caption>
+            </View>
           </View>
         </View>
-      </View>
 
-      <View style={styles.userInfoSection}>
-        <View style={styles.row}>
-          <Icon name="email" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>john_white@gmail.com</Text>
-        </View>
-        <View style={styles.row}>
-          <Icon name="map-marker-radius" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>No.17, Flower Road, Colombo 4</Text>
-        </View>
-        <View style={styles.row}>
-          <Icon name="phone" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>+94 777722992</Text>
-        </View>
-      </View>
-
-      <View style={styles.infoBoxWrapper}>
-      <TouchableOpacity
-        style={[
-          styles.infoBox,
-          {
-            borderRightColor: '#dddddd',
-            borderRightWidth: 1,
-          },
-        ]}
-        onPress={() => navigation.navigate('Reserved Books')} // Pass the infoType as a parameter
-      >
-        <Text>2</Text>
-        <Text>Reserved Books</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.infoBox}
-        onPress={() => navigation.navigate('Borrowed Books')} // Pass the infoType as a parameter
-      >
-        <Text>3</Text>
-        <Text>Borrowed Books</Text>
-      </TouchableOpacity>
-    </View>
-
-      <View style={styles.menuWrapper}>
-        <TouchableRipple onPress={()=> navigation.navigate('Wishlist')}>
-          <View style={styles.menuItem}>
-            <Icon name="heart-outline" color="#FF6347" size={25}/>
-            <Text style={styles.menuItemText}>Your Wishlist</Text>
+        <View style={styles.userInfoSection}>
+          <View style={styles.row}>
+            <Icon name="email" color="#777777" size={20} />
+            <Text style={{ color: "#777777", marginLeft: 20 }}>john_white@gmail.com</Text>
           </View>
-        </TouchableRipple>
-        {/* <TouchableRipple onPress={() => {}}>
+          <View style={styles.row}>
+            <Icon name="map-marker-radius" color="#777777" size={20} />
+            <Text style={{ color: "#777777", marginLeft: 20 }}>No.17, Flower Road, Colombo 4</Text>
+          </View>
+          <View style={styles.row}>
+            <Icon name="phone" color="#777777" size={20} />
+            <Text style={{ color: "#777777", marginLeft: 20 }}>+94 777722992</Text>
+          </View>
+        </View>
+
+        <View style={styles.infoBoxWrapper}>
+          <TouchableOpacity
+            style={[
+              styles.infoBox,
+              {
+                borderRightColor: '#dddddd',
+                borderRightWidth: 1,
+              },
+            ]}
+            onPress={() => navigation.navigate('Reserved Books')} // Pass the infoType as a parameter
+          >
+            <Text>2</Text>
+            <Text>Reserved Books</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.infoBox}
+            onPress={() => navigation.navigate('Borrowed Books')} // Pass the infoType as a parameter
+          >
+            <Text>3</Text>
+            <Text>Borrowed Books</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.menuWrapper}>
+          <TouchableRipple onPress={() => navigation.navigate('Wishlist')}>
+            <View style={styles.menuItem}>
+              <Icon name="heart-outline" color="#FF6347" size={25} />
+              <Text style={styles.menuItemText}>Your Wishlist</Text>
+            </View>
+          </TouchableRipple>
+          {/* <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
             <Icon name="cart" color="#FF6347" size={25}/>
             <Text style={styles.menuItemText}>Reserved Books</Text>
           </View>
         </TouchableRipple> */}
-        {/* <TouchableRipple onPress={() => {}}>
+          {/* <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
             <Icon name="book" color="#FF6347" size={25}/>
             <Text style={styles.menuItemText}>Currently Borrowed Books</Text>
           </View>
         </TouchableRipple> */}
-        <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-            <Icon name="book" color="#FF6347" size={25}/>
-            <Text style={styles.menuItemText}>Borrowed Books History</Text>
-          </View>
-        </TouchableRipple>
-        <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-            <Icon name="credit-card" color="#FF6347" size={25}/>
-            <Text style={styles.menuItemText}>Overdue Charges</Text>
-          </View>
-        </TouchableRipple>
-        <TouchableRipple onPress={() => navigation.navigate('Welcome')}>
-          <View style={styles.menuItem}>
-            <Icon name="account" color="#FF6347" size={25}/>
-            <Text style={styles.menuItemText}>Logout</Text>
-          </View>
-        </TouchableRipple>
-        
-        
-        
-      </View>
+          <TouchableRipple onPress={() => { }}>
+            <View style={styles.menuItem}>
+              <Icon name="book" color="#FF6347" size={25} />
+              <Text style={styles.menuItemText}>Borrowed Books History</Text>
+            </View>
+          </TouchableRipple>
+          <TouchableRipple onPress={() => { }}>
+            <View style={styles.menuItem}>
+              <Icon name="credit-card" color="#FF6347" size={25} />
+              <Text style={styles.menuItemText}>Overdue Charges</Text>
+            </View>
+          </TouchableRipple>
+          <TouchableRipple onPress={() => {
+            logout()
+            navigation.navigate('Welcome')
+          }}>
+            <View style={styles.menuItem}>
+              <Icon name="account" color="#FF6347" size={25} />
+              <Text style={styles.menuItemText}>Logout</Text>
+            </View>
+          </TouchableRipple>
+
+
+
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
