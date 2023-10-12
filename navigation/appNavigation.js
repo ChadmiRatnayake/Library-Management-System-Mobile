@@ -16,6 +16,7 @@ import NotificationsScreen from '../screens/NotificationsScreen';
 import Books from '../screens/BooksScreen';
 import ReservedBookScreen from '../screens/ReservedBookScreen';
 import BorrowedBookScreen from '../screens/BorrowedBookScreen';
+import DisplayBooks from '../components/DisplayBooks';
 
 
 const Stack = createNativeStackNavigator();
@@ -33,7 +34,7 @@ export default function AppNavigation() {
         <Stack.Screen name="BookDetailsScreen" options={{headerShown: false}} component={BookDetailsScreen} />
         <Stack.Screen name="Wishlist" options={{headerShown: false}} component={WishlistScreen} />
         <Stack.Screen name="EditProfile" options={{headerShown: true}} component={EditProfileScreen} />
-        <Stack.Screen name="Recents" options={{headerShown: true}} component={Books} />
+        <Stack.Screen name="Recents" options={{headerShown: true}} component={DisplayBooks} />
         <Stack.Screen name="Reserved Books" options={{headerShown: true}} component={ReservedBookScreen} />
         <Stack.Screen name="Borrowed Books" options={{headerShown: true}} component={BorrowedBookScreen} />
         

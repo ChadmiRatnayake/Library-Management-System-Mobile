@@ -42,7 +42,7 @@ const BooksHorizontal = ({ title }) => {
                     onPress={() => navigation.navigate('BookDetailsScreen', { book: item })}
                 >
                     <View style={styles.bookImageContainerHorizontal}>
-                        <Image source={item.coverPage} style={styles.bookImageHorizontal} />
+                        <Image source={{uri:item.url}} style={styles.bookImageHorizontal} />
                     </View>
                     <Text style={styles.bookTitleHorizontal}>
                         {item.title}
@@ -85,7 +85,7 @@ const BooksHorizontal = ({ title }) => {
             </View>
             <FlatList
                 data={bookData}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item) => item.bookid}
                 renderItem={renderBookItem}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}

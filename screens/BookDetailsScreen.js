@@ -53,7 +53,7 @@ export default function BookDetailsScreen({ route }) {
             <FontAwesomeIcon icon={faArrowLeft} size={20} color="black" />
           </TouchableOpacity>
 
-          <Image source={book.coverPage} style={styles.bookImage} />
+          <Image source={{uri:book.url}} style={styles.bookImage} />
           <Text style={styles.bookTitle}>{book.title}</Text>
           
           <View style={styles.availabilityContainer}>
