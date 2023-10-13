@@ -14,7 +14,6 @@ export default function BookDetailsScreen({ route }) {
   const [wishlisted, setWishlisted] = useState(!book.status);
   const [bookReserved, setBookReserved] = useState(!book.status);
 
-
   const availabilityIcon = !bookReserved ? (
     <FontAwesomeIcon icon={faCheck} size={20} color="green" />
   ) : (

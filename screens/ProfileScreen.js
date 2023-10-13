@@ -108,7 +108,7 @@ const ProfileScreen = () => {
             </View>
           </TouchableRipple>
           <TouchableRipple onPress={() => {
-            logout()
+            logout();
             navigation.navigate('Welcome')
           }}>
             <View style={styles.menuItem}>
@@ -116,11 +116,9 @@ const ProfileScreen = () => {
               <Text style={styles.menuItemText}>Logout</Text>
             </View>
           </TouchableRipple>
-
-
-
         </View>
       </ScrollView>
+
     </SafeAreaView>
   );
 };

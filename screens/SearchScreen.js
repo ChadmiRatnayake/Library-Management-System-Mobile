@@ -12,17 +12,16 @@ import { set } from 'react-native-reanimated';
 function SearchScreen() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [bookData, setBookData] = useState([]);
+  const [bookData, setBookData] = useState([]); // Assuming you have your book data somewhere
 
   const handleSearch = (text) => {
     setSearchTerm(text);
     const filteredBooks = bookData.filter(book =>
-      book.title.toLowerCase().includes(searchTerm.toLowerCase())
+      book.title.toLowerCase().includes(text.toLowerCase())
     );
     // Update the search results state
     setSearchResults(filteredBooks);
   };
-
   useEffect(() => {
     // Fetch the book data and update the state
     fetchBooks()
@@ -38,20 +37,18 @@ function SearchScreen() {
   return (
     <SafeAreaView style={styles.container}>
       {/* <ScrollView contentContainerStyle={styles.scrollViewContent}> */}
-        <View style={styles.innerContainer}>
-          <Text style={styles.header}>Search Books</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={text => {handleSearch(text)}}
-            value={setSearchTerm}
-            placeholder="Search by title"
-          />
-          <Button title="Search" onPress={handleSearch} />
-
-          
-        </View>
+      <View style={styles.innerContainer}>
+        <Text style={styles.header}>Search Books</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={handleSearch}
+          value={searchTerm}
+          placeholder="Search by title"
+        />
+        <Button title="Search" onPress={handleSearch} style={styles}/>
+      </View>
       {/* </ScrollView> */}
-        <DisplayBooks searchTerm={searchTerm} searchResults={searchResults}/>
+      <DisplayBooks searchTerm={searchTerm} searchResults={searchResults} />
     </SafeAreaView>
   );
 }
@@ -69,11 +66,14 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     alignItems: 'center',
+    zIndex:2
+  
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 15,
+
   },
   input: {
     height: 40,
