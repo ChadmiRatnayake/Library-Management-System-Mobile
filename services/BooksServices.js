@@ -103,3 +103,21 @@ export async function cancelReservation(reservationId) {
   }
 }
 
+
+export async function borrowedlist() {
+  try {
+    const authToken = await getAuth(); // Use await to get the authentication token
+    const response = await fetch(`${config.url}/api/barrows/find`, {
+      headers: {
+        'x-auth-token': authToken, // Use the obtained token here
+      },
+    });
+    const data = await response.json(); // Parse the response as JSON
+    const books = data.map(item => ({ book: item.book, name: item.name, barrow_id: item.barrow_id }));
+    return books;
+  } catch (error) {
+    console.log(error);
+    return null; // Return null or handle the error as needed
+  }
+}
+

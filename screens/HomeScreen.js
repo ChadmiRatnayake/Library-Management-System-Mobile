@@ -99,9 +99,7 @@ export default function HomeScreen() {
             <Text>{item.title}</Text>
           </View>
         )}
-        />*/}
-
-          
+        />*/} 
 
 
     </SafeAreaView>
