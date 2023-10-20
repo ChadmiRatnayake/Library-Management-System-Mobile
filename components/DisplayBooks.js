@@ -22,7 +22,15 @@ export default function DisplayBooks({ searchTerm, searchResults}) {
     // Call the fetchBooks function to fetch book data
     fetchBooks()
       .then((data) => {
-        setBookData(data);
+        // Filter the book data to show only one book for each title
+        const uniqueBooks = data.filter(
+          (book, index, self) =>
+            index ===
+            self.findIndex(
+              (b) => b.title.toLowerCase() === book.title.toLowerCase()
+            )
+        );
+        setBookData(uniqueBooks);
         setLoading(false);
       })
       .catch((error) => {
@@ -30,6 +38,7 @@ export default function DisplayBooks({ searchTerm, searchResults}) {
         setLoading(false);
       });
   }, []);
+  
 
   const renderBookItem = ({ item }) => (
     <TouchableOpacity

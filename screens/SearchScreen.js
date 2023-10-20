@@ -16,9 +16,17 @@ function SearchScreen() {
 
   const handleSearch = (text) => {
     setSearchTerm(text);
-    const filteredBooks = bookData.filter(book =>
-      book.title.toLowerCase().includes(text.toLowerCase())
-    );
+    // const filteredBooks = bookData.filter(book =>
+    //   book.title.toLowerCase().includes(text.toLowerCase())
+    // );
+
+    const filteredBooks = bookData.filter((book, index, self) => {
+      return (
+        book.title.toLowerCase().includes(text.toLowerCase()) &&
+        index === self.findIndex((b) => b.title === book.title)
+      );
+    });
+
     // Update the search results state
     setSearchResults(filteredBooks);
   };
