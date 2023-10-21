@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import BookCard from '../components/BookCard';
-
+import WishlistBooks from '../components/WishlistBooks';
 
 
 const WishlistScreen = () => {
@@ -21,7 +21,7 @@ const WishlistScreen = () => {
 
   // Render each book item in the wishlist
   const renderItem = ({ item }) => (
-    <BookCard
+    <WishlistBooks
         book={item}
         showRemoveButton={true} // Pass true to show the remove button
         onRemovePress={() => handleRemoveFromWishlist(item.id)}

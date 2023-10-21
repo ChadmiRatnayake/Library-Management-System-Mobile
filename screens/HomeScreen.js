@@ -80,7 +80,7 @@ export default function HomeScreen() {
         {/* <Books selectedCategory={selectedCategory} /> */}
 
         <ScrollView>
-        <BooksRecommended />
+        {/* <BooksRecommended /> */}
         <BooksRecent />
         
         <BooksFavourites />

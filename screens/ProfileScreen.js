@@ -82,7 +82,7 @@ const ProfileScreen = () => {
         ]}
         onPress={() => navigation.navigate('Reserved Books')} // Pass the infoType as a parameter
       >
-        <Text>2</Text>
+        {/* <Text>2</Text> */}
         <Text>Reserved Books</Text>
       </TouchableOpacity>
 
@@ -90,7 +90,7 @@ const ProfileScreen = () => {
         style={styles.infoBox}
         onPress={() => navigation.navigate('Borrowed Books')} // Pass the infoType as a parameter
       >
-        <Text>3</Text>
+        {/* <Text>3</Text> */}
         <Text>Borrowed Books</Text>
       </TouchableOpacity>
     </View>
@@ -114,13 +114,13 @@ const ProfileScreen = () => {
             <Text style={styles.menuItemText}>Currently Borrowed Books</Text>
           </View>
         </TouchableRipple> */}
-        <TouchableRipple onPress={() => {}}>
+        {/* <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
             <Icon name="book" color="#FF6347" size={25}/>
             <Text style={styles.menuItemText}>Borrowed Books History</Text>
           </View>
-        </TouchableRipple>
-        <TouchableRipple onPress={() => {}}>
+        </TouchableRipple> */}
+        <TouchableRipple onPress={()=> navigation.navigate('Overdue Charges')}>
           <View style={styles.menuItem}>
             <Icon name="credit-card" color="#FF6347" size={25}/>
             <Text style={styles.menuItemText}>Overdue Charges</Text>
