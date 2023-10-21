@@ -104,6 +104,54 @@ export async function cancelReservation(reservationId) {
 }
 
 
+// export async function cancelReservation(reservationId) {
+//   try {
+//     const authToken = await getAuth();
+//     // Show a confirmation box
+//     Alert.alert(
+//       "Confirm Delete",
+//       "Are you sure you want to delete this reservation?",
+//       [
+//         {
+//           text: "Cancel",
+//           style: "cancel",
+//         },
+//         {
+//           text: "OK",
+//           onPress: async () => {
+//             try {
+//               const response = await fetch(
+//                 `${config.url}/api/reservations/delete/${reservationId}`,
+//                 {
+//                   method: "DELETE",
+//                   headers: {
+//                     "x-auth-token": authToken,
+//                   },
+//                 }
+//               );
+//               if (response.ok) {
+//                 Alert.alert("Reservation deleted successfully");
+//               } else {
+//                 Alert.alert("Failed to delete reservation");
+//               }
+//             } catch (error) {
+//               Alert.alert("Error deleting reservation");
+//               throw error;
+//             }
+//           },
+//         },
+//       ],
+//       { cancelable: true }
+//     );
+//   } catch (error) {
+//     Alert.alert("Error deleting reservation");
+//     throw error;
+//   }
+// }
+
+
+
+
 export async function borrowedlist() {
   try {
     const authToken = await getAuth(); // Use await to get the authentication token
