@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { Alert, View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
@@ -25,11 +25,32 @@ export default function BookDetailsScreen({ route }) {
  
   };
 
-  const handleReserve = async() => {
-        console.log(book);
-        setBookReserved(true)
-        await reserve(book.bookid);
- };
+  const handleReserve = () => {
+    Alert.alert(
+      'Confirm Reservation',
+      'Are you sure you want to reserve this book?',
+      [
+        {
+          text: 'No',
+          style: 'cancel',
+        },
+        {
+          text: 'Yes',
+          onPress: async () => {
+            try {
+              console.log(book);
+              setBookReserved(true);
+              await reserve(book.bookid);
+            } catch (error) {
+              console.error(error);
+            }
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
 
   return (
     <SafeAreaView style={styles.safeAreaView}>

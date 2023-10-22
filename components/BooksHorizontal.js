@@ -56,7 +56,7 @@ const BooksHorizontal = ({ title }) => {
             return (
                 <TouchableOpacity
                     style={styles.seeMoreContainer}
-                    onPress={() => navigation.navigate('Recents')}>
+                    onPress={() => navigation.navigate('Trending')}>
                     <Text style={styles.seeMoreText}>See More</Text>
                     <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
                 </TouchableOpacity>

@@ -50,7 +50,7 @@ const ProfileScreen = () => {
             <Title style={[styles.title, {
               marginTop:15,
               marginBottom: 5,
-            }]}>John White</Title>
+            }]}>Kiwi Bear</Title>
             <Caption style={styles.caption}>{name}</Caption>
           </View>
         </View>

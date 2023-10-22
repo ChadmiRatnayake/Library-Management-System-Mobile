@@ -3,6 +3,7 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { bookItems } from '../constants'; // Import your dummy data
 import { SafeAreaView } from 'react-native-safe-area-context';
 import OverdueBookCard from '../components/OverdueBookCard';
+import OverdueCharge from '../components/OverdueCharge';
 
 const OverdueScreen = () => {
   const overdueBooks = bookItems.filter((book) => book.overDue);
@@ -12,7 +13,7 @@ const OverdueScreen = () => {
       {/* <Text style={styles.header}>Overdue Charges</Text> */}
       <FlatList
         data={overdueBooks}
-        renderItem={({ item }) => <OverdueBookCard book={item} />}
+        renderItem={({ item }) => <OverdueCharge book={item} />}
         keyExtractor={(item) => item.id}
       />
     </SafeAreaView>

@@ -16,11 +16,11 @@ export const categoryData = [
   },
   {
     id: 4,
-    title: "Category 4",
+    title: "Poetry",
   },
   {
     id: 5,
-    title: "Category 5",
+    title: "Children's Stories", 
   },
 ]
 
@@ -60,7 +60,7 @@ export const bookItems = [
     coverPage: require('../assets/images/TintinInAmerica.jpg'),
     title: 'Tintin In America',
     category: 'Adventurous',
-    author: 'Georges Remi',
+    author: 'Hergé',
     language: 'English',
     abstract:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel dolor non ex vehicula tincidunt.',
@@ -75,7 +75,7 @@ export const bookItems = [
     coverPage: require('../assets/images/underTheOcean.jpg'),
     title: 'Under The Ocean',
     category: 'Science',
-    author: 'Author 2',
+    author: 'Gillian Candler',
     language: 'English',
     abstract:
       'Sed at arcu vitae libero eleifend vehicula in eget ipsum. Donec id orci et quam venenatis luctus.',
@@ -90,7 +90,7 @@ export const bookItems = [
     coverPage: require('../assets/images/magicTreeHouse.jpg'),
     title: 'Magic Tree House',
     category: 'Fiction',
-    author: 'Mary Pope Osborne',
+    author: 'Mary Osborne',
     language: 'English',
     abstract:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel dolor non ex vehicula tincidunt.',

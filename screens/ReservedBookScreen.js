@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import BookCard from '../components/BookCard';
@@ -11,18 +11,34 @@ const ReservedBookScreen = () => {
   const [reservedList, setReservedList] = useState();
 
 
-  const handleRemoveFromReservedList = async (reservation_id) => {
-   
-    try{
-      await cancelReservation(reservation_id);
-      const updatedReservedList = reservedList.filter((reservation) => reservation.reservation_id !== reservation_id);
-      setReservedList(updatedReservedList);
-    }
-    catch(e){
-      console.log(e);
-    }
-    // Remove the book from the reservedList based on its ID
+  const handleRemoveFromReservedList = (reservation_id) => {
+    Alert.alert(
+        'Cancel Reservation',
+        'Are you sure you want cancel?',
+        [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'OK',
+            onPress: async () => {
+              try {
+                await cancelReservation(reservation_id);
+                const updatedReservedList = reservedList.filter(
+                  (reservation) => reservation.reservation_id !== reservation_id
+                );
+                setReservedList(updatedReservedList);
+              } catch (e) {
+                console.log(e);
+              }
+            },
+          },
+        ],
+        { cancelable: false }
+    );
   };
+
 
 
   useEffect(() => {

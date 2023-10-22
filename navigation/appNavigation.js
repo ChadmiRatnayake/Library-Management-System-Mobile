@@ -36,7 +36,7 @@ export default function AppNavigation() {
         <Stack.Screen name="BookDetailsScreen" options={{headerShown: false}} component={BookDetailsScreen} />
         <Stack.Screen name="Wishlist" options={{headerShown: false}} component={WishlistScreen} />
         <Stack.Screen name="EditProfile" options={{headerShown: true}} component={EditProfileScreen} />
-        <Stack.Screen name="Recents" options={{headerShown: true}} component={DisplayBooks} />
+        <Stack.Screen name="Trending" options={{headerShown: true}} component={DisplayBooks} />
         <Stack.Screen name="Reserved Books" options={{headerShown: true}} component={ReservedBookScreen} />
         <Stack.Screen name="Borrowed Books" options={{headerShown: true}} component={BorrowedBookScreen} />
            
