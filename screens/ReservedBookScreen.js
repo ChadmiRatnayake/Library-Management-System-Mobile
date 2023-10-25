@@ -3,8 +3,8 @@ import { FlatList, StyleSheet, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import BookCard from '../components/BookCard';
-import { reservedlist } from '../services/BooksServices';
-import { cancelReservation } from '../services/BooksServices';
+import { reservedlist } from '../services/Reservations';
+import { cancelReservation } from '../services/Reservations';
 
 const ReservedBookScreen = () => {
   const navigation = useNavigation();
@@ -75,6 +75,7 @@ const ReservedBookScreen = () => {
     </SafeAreaView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

@@ -14,10 +14,10 @@
 //   const [borrowedList, setBorrowedList] = useState();
 //   const [error, setError] = useState(null);
 
-//   // const handleRemoveFromReservedList = (bookId) => {
-//   //   // Remove the book from the reservedList based on its ID
-//   //   const updatedReservedList = reservedList.filter((book) => book.id !== bookId);
-//   //   setReservedList(updatedReservedList);
+//   // const handleRemoveFromborrowedList = (bookId) => {
+//   //   // Remove the book from the borrowedList based on its ID
+//   //   const updatedBorrowedList = borrowedList.filter((book) => book.id !== bookId);
+//   //   setBorrowedList(updatedBorrowedList);
 //   // };
 
 //   useEffect(() => {
@@ -34,12 +34,12 @@
 //       });
 //   },[])
 
-//   // Render each book item in the reservedList
+//   // Render each book item in the borrowedList
 //   // const renderItem = ({ item }) => (
 //   //   <BookCard
 //   //       book={item}
 //   //       showRemoveButton={false} // Pass true to show the remove button
-//   //       onRemovePress={() => handleRemoveFromReservedList(item.id)}
+//   //       onRemovePress={() => handleRemoveFromborrowedList(item.id)}
 //   //   />
 //   // );
 
@@ -131,7 +131,7 @@
 
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { bookItems } from '../constants'; // Import your dummy data
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -141,25 +141,44 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import BookCard from '../components/BookCard';
 import OverdueBookCard from '../components/OverdueBookCard';
 
+import { borrowedlist } from '../services/Borrowings';
+
 
 const BorrowedBookScreen = () => {
   const navigation = useNavigation();
-  const [reservedList, setReservedList] = useState(bookItems.filter((book) => book.reserved));
+  const [borrowedList, setBorrowedList] = useState();
 
-  const handleRemoveFromReservedList = (bookId) => {
-    // Remove the book from the reservedList based on its ID
-    const updatedReservedList = reservedList.filter((book) => book.id !== bookId);
-    setReservedList(updatedReservedList);
-  };
+  useEffect(() => {
+    // Call the fetchBooks function to fetch book data
+    borrowedlist()
+      .then((data) => {
+        setBorrowedList(data);
+        // console.log(data);
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  }, []);
+
+
+
+  // // Render each book item in the borrowedList
+  // const renderItem = ({ item }) => (
+  //   <OverdueBookCard
+  //       book={item}
+  //       showRemoveButton={false} // Pass true to show the remove button
+  //       onRemovePress={() => handleRemoveFromborrowedList(item.id)}
+  //   />
+  // );
 
   // Render each book item in the reservedList
-  const renderItem = ({ item }) => (
-    <OverdueBookCard
-        book={item}
-        showRemoveButton={false} // Pass true to show the remove button
-        onRemovePress={() => handleRemoveFromReservedList(item.id)}
+  const renderItem = ({ borrowing }) => (
+    <BookCard
+        book={borrowing.book}
+        showRemoveButton={false} // Pass true to show the remove button}
     />
   );
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -172,9 +191,9 @@ const BorrowedBookScreen = () => {
 
       <Text style={styles.header}>Reserved Books</Text> */}
       <FlatList
-        data={reservedList}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        data={borrowedList}
+        renderItem={({ item }) => renderItem({ borrowing: item })}
+        keyExtractor={(item) => item.barrow_id}
       />
     </SafeAreaView>
   );
