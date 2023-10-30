@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { fetchBooks } from '../services/BooksController';
+import MyLoadingComponent from './Loading';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -44,7 +45,7 @@ export default function DisplayBooks({ searchTerm, searchResults}) {
   );
 
   if (loading) {
-    return <Text>Loading...</Text>;
+    return <MyLoadingComponent/>
   }
 
   if (error) {

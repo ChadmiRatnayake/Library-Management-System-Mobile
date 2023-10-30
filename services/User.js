@@ -27,15 +27,14 @@ export async function updateUser(formData) {
                 'Content-Type': 'application/json',
                 'x-auth-token': authToken,
             },
-            body: JSON.stringify(formData), // Serialize formData to JSON
+            body: JSON.stringify(formData),
         });
 
         if (response.ok) {
-            const data = await response.json();
-            console.log(data);
+            const data = await response.text();
+        
         } else {
-            const errorData = await response.json();
-            console.error(`Request failed with status: ${response.status}`, errorData);
+            const errorData = await response.text();
         }
     } catch (error) {
         Alert.alert(`An error occurred: ${error.message}`);

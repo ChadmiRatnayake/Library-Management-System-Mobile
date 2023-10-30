@@ -13,10 +13,15 @@ import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native';
 import { logout } from '../services/Authentication';
 import { getUser } from '../services/User';
+import MyLoadingComponent from '../components/Loading';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
   const [user, setUser] = React.useState([]);
+
+  if (user == null) {
+    return <MyLoadingComponent/>
+  }
 
   useEffect(() => {
     getUser()

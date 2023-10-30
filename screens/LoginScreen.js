@@ -26,22 +26,17 @@ export default function LoginScreen() {
         body: JSON.stringify({ name, password }),
       });
       
-      console.log('Response Status:', response.status);
     
       if (response.status === 200 || response.status === 201) {
-        console.log('Login Success:',);
         SetAuth(response.headers.map['x-auth-token']);
         Alert.alert('Login Success');
         navigation.navigate('Library');
       } else if (response.status === 404) {
-        console.log('Login Failed: Resource not found');
         Alert.alert('Login Failed: Resource not found');
       } else {
-        console.log('Login Failed: Unexpected error');
         Alert.alert('Login Failed: Unexpected error');
       }
     } catch (error) {
-      console.error('Network Error:', error);
       Alert.alert('Network Error: ' + error.message);
     }
     

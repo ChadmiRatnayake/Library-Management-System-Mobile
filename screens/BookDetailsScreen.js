@@ -25,7 +25,6 @@ export default function BookDetailsScreen({ route }) {
   };
 
   const handleReserve = async() => {
-        console.log(book);
         setBookReserved(true)
         await reserve(book.bookid);
  };
@@ -41,8 +40,8 @@ export default function BookDetailsScreen({ route }) {
             <FontAwesomeIcon icon={faArrowLeft} size={20} color="black" />
           </TouchableOpacity>
 
-          <Image source={{uri:book.url}} style={styles.bookImage} />
-          <Text style={styles.bookTitle}>{book.title}</Text>
+          <Image source={{uri:book.url || book.image}} style={styles.bookImage} />
+          <Text style={styles.bookTitle}>{book.title || book.name}</Text>
           
           <View style={styles.availabilityContainer}>
             <Text style={styles.availabilityText}>
@@ -89,7 +88,7 @@ export default function BookDetailsScreen({ route }) {
           <Text style={styles.bookCategory}>Category: {book.category}</Text>
           <Text style={styles.bookAuthor}>Author: {book.author}</Text>
           <Text style={styles.bookLanguage}>Language: {book.language}</Text>
-          <Text style={styles.bookAbstract}>{book.abstract}</Text>
+          <Text style={styles.bookAbstract}>{book.abstract || book.detail}</Text>
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { fetchBooks } from "../services/BooksController";
 import { config } from "../configurations/config";
-
+import MyLoadingComponent from "./Loading";
 const windowWidth = Dimensions.get('window').width;
 
 const BooksHorizontal = ({ title }) => {
@@ -70,9 +70,6 @@ const BooksHorizontal = ({ title }) => {
     }
 
 
-
-
-
     useEffect(() => {
         if (isFocused) {
             fetchBookData();
@@ -97,7 +94,7 @@ const BooksHorizontal = ({ title }) => {
                     </Text>
                 </TouchableOpacity>
             );
-        } else if (index === 4) {
+        } else if (index == 4) {
             return (
                 <TouchableOpacity
                     style={styles.seeMoreContainer}
@@ -112,7 +109,7 @@ const BooksHorizontal = ({ title }) => {
 
 
     if (loading) {
-        return <Text>Loading...</Text>;
+        return <MyLoadingComponent />;
     }
 
     if (error) {
@@ -132,7 +129,7 @@ const BooksHorizontal = ({ title }) => {
             </View>
             <FlatList
                 data={bookData}
-                keyExtractor={(item) => item.bookid}
+                // keyExtractor={(item) => item.bookid || item.image}
                 renderItem={renderBookItem}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}

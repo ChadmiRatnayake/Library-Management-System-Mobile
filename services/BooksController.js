@@ -18,18 +18,7 @@ export const fetchBooks = async () => {
   }
 }
 
-// export async function findBook(bookId) {
-//   try {
-//     console.log(bookId);
-//     const response = await fetch(`${config.url}/api/books/findone/${bookId}`);
-//     return response.data;
-//   } // Assuming the API returns an array of book data
-//   catch (error) {
-//     console.log(error)
-//     throw error;
-//   }
 
-// }
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +49,6 @@ export async function reserve(bookId) {
       Alert.alert('Reservation Failed');
     }
   } catch (error) {
-    console.log(error);
     if (error.response && error.response.status !== 401) {
       // Handle non-401 errors
       Alert.alert('Reservation Failed');
@@ -82,7 +70,6 @@ export async function reservedlist() {
     const books = data.map(item => ({ book: item.book, name: item.name, reservation_id: item.reservation_id }));
     return books;
   } catch (error) {
-    console.log(error);
     return null; // Return null or handle the error as needed
   }
 }
@@ -116,7 +103,6 @@ export async function getBarrowed() {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error)
     if (error.response.status !== 401) {
       Alert.alert("Getting barrow Unseccessful");
     }

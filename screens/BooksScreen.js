@@ -33,9 +33,6 @@ export default function Books() {
       
       <View style={styles.safeAreaContainer}>
 
-        {/* <Text style={styles.title}>
-          Recents
-        </Text> */}
 
         <FlatList
           data={bookItems}
@@ -57,7 +54,6 @@ export const BooksRecent = () => {
 }
 
 export const BooksRecommended = () => {
-  // return <BooksHorizontal title="For You" data={bookItems} />;
   return <BooksHorizontal title="For You" />;
 }
 

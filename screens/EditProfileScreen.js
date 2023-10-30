@@ -15,6 +15,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ImagePicker from 'react-native-image-picker';
 import { getUser } from "../services/User";
 import { updateUser } from "../services/User";
+import MyLoadingComponent from "../components/Loading";
 
 const EditProfileScreen = () => {
 
@@ -25,6 +26,8 @@ const EditProfileScreen = () => {
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [phone_number, setPhone_number] = useState("");
+
+
     
   useEffect(() => {
     getUser()
@@ -50,6 +53,10 @@ const EditProfileScreen = () => {
 
   // Function to handle profile picture upload
   const selectProfileImage = () => {
+
+    if (user === "") {
+      return <MyLoadingComponent/>
+    }
     const options = {
       title: 'Select Profile Picture',
       cancelButtonTitle: 'Cancel',
@@ -64,9 +71,7 @@ const EditProfileScreen = () => {
   
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel) {
-        console.log('User cancelled image picker');
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
       } else if (response.customButton === 'delete') {
         // Handle delete option here
         setProfileImage(null); // Clear the profile image
@@ -79,17 +84,18 @@ const EditProfileScreen = () => {
  
   
   // Function to save changes
-  const saveChanges = async() => {
-
-    await updateUser({
+  const saveChanges = async () => {
+    const userUpdateData = {
       name: username,
       email: email,
       address: address,
       phone_number: phone_number,
-    });
+    };
+  
+    await updateUser(userUpdateData);
     navigation.goBack();
   };
-
+  
   return (
     
     <View style={styles.container}>

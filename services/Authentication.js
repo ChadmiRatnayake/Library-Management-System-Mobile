@@ -15,7 +15,6 @@ const getAuth = async () => {
     }
     
   } catch (e) {
-    console.log(e);
     return null; // Return null or handle the error appropriately
   }
 }
@@ -44,7 +43,6 @@ const logout = async () => {
     await AsyncStorage.removeItem('x-auth-token');
     } 
   catch (e) {
-    console.log(e);
   }
   
 }

@@ -85,27 +85,8 @@ export default function HomeScreen() {
         <ScrollView>
           <BooksRecommended />
           <BooksRecent />
-
           <BooksFavourites />
         </ScrollView>
-
-
-
-
-        {/* <Books books={filteredBooks} />
-      <FlatList
-        data={filteredBooks}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          // Render your book item here
-          <View>
-            <Text>{item.title}</Text>
-          </View>
-        )}
-        />*/}
-
-
-
 
       </SafeAreaView>
     </View>

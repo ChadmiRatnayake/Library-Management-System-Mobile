@@ -29,7 +29,6 @@ function SearchScreen() {
         setBookData(data);
       })
       .catch((error) => {
-        console.error('Error fetching book data:', error);
       });
   }, []);
 

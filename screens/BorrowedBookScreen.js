@@ -21,7 +21,6 @@ const BorrowedBookScreen = () => {
       .catch((error) => {
         setError(error);
       });
-      console.log(barrowedList);
   }, []);
 
 

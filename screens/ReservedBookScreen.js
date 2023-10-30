@@ -19,7 +19,6 @@ const ReservedBookScreen = () => {
       setReservedList(updatedReservedList);
     }
     catch(e){
-      console.log(e);
     }
     // Remove the book from the reservedList based on its ID
   };
@@ -31,7 +30,6 @@ const ReservedBookScreen = () => {
       .then((data) => {
         setReservedList(data);
     
-        console.log(data);
       
       })
       .catch((error) => {
