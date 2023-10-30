@@ -1,5 +1,7 @@
+
 import React, {useState, useEffect} from 'react';
 import {View, SafeAreaView, StyleSheet, ScrollView} from 'react-native';
+
 import {
   Avatar,
   Title,
@@ -11,10 +13,11 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native';
-import {userDetails} from '../services/User';
+import { logout } from '../services/Authentication';
+import { getAuth } from '../services/Authentication';
 
 
-const ProfileScreen = () => { 
+const ProfileScreen = () => {
   const navigation = useNavigation();
 
   const [name, setName] = useState('');
@@ -38,6 +41,7 @@ const ProfileScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
+
       <View style={styles.userInfoSection}>
         <View style={{flexDirection: 'row', marginTop: 25}}>
           <Avatar.Image 
@@ -52,9 +56,9 @@ const ProfileScreen = () => {
               marginBottom: 5,
             }]}>Kiwi Bear</Title>
             <Caption style={styles.caption}>{name}</Caption>
+
           </View>
         </View>
-      </View>
 
       <View style={styles.userInfoSection}>
         <View style={styles.row}>
@@ -68,8 +72,8 @@ const ProfileScreen = () => {
         <View style={styles.row}>
           <Icon name="phone" color="#777777" size={20}/>
           <Text style={{color:"#777777", marginLeft: 20}}>+94 777722992</Text>
+
         </View>
-      </View>
 
       <View style={styles.infoBoxWrapper}>
       <TouchableOpacity
@@ -95,20 +99,21 @@ const ProfileScreen = () => {
       </TouchableOpacity>
     </View>
 
-      <View style={styles.menuWrapper}>
-        <TouchableRipple onPress={()=> navigation.navigate('Wishlist')}>
-          <View style={styles.menuItem}>
-            <Icon name="heart-outline" color="#FF6347" size={25}/>
-            <Text style={styles.menuItemText}>Your Wishlist</Text>
-          </View>
-        </TouchableRipple>
-        {/* <TouchableRipple onPress={() => {}}>
+
+        <View style={styles.menuWrapper}>
+          <TouchableRipple onPress={() => navigation.navigate('Wishlist')}>
+            <View style={styles.menuItem}>
+              <Icon name="heart-outline" color="#FF6347" size={25} />
+              <Text style={styles.menuItemText}>Your Wishlist</Text>
+            </View>
+          </TouchableRipple>
+          {/* <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
             <Icon name="cart" color="#FF6347" size={25}/>
             <Text style={styles.menuItemText}>Reserved Books</Text>
           </View>
         </TouchableRipple> */}
-        {/* <TouchableRipple onPress={() => {}}>
+          {/* <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
             <Icon name="book" color="#FF6347" size={25}/>
             <Text style={styles.menuItemText}>Currently Borrowed Books</Text>
@@ -136,6 +141,7 @@ const ProfileScreen = () => {
         
         
       </View>
+
       </ScrollView>
     </SafeAreaView>
   );

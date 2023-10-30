@@ -41,7 +41,8 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { themeColors } from '../theme'
 import { useNavigation } from '@react-navigation/native'
-
+import { authenticateUser} from '../services/Authentication'
+import { getAuth } from '../services/Authentication'
 
 export default function WelcomeScreen() {
   const navigation = useNavigation();
@@ -55,7 +56,17 @@ export default function WelcomeScreen() {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Login')}
+            onPress={async () => {
+              const authToken = await authenticateUser();
+              console.log(authToken)
+              if (authToken) {
+                navigation.navigate('Library');
+                
+              } else {
+                navigation.navigate('Login');
+              }
+            }}
+            
             style={styles.button}
           >
             <Text style={styles.buttonText}>Get Started</Text>

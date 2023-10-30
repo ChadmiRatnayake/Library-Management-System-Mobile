@@ -28,7 +28,6 @@ const BooksHorizontal = ({ title }) => {
 
     useEffect(() => {
         if (isFocused) {
-            // Fetch data when the screen is focused
             fetchBookData();
         }
     }, [isFocused]);
