@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import {
   Avatar,
@@ -12,10 +12,26 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native';
 import { logout } from '../services/Authentication';
-import { getAuth } from '../services/Authentication';
+import { getUser } from '../services/User';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
+  const [user, setUser] = React.useState([]);
+
+  useEffect(() => {
+    getUser()
+      .then((data) => {
+        setUser(data);
+        
+      })
+      .catch((error) => {
+        setError(error);
+
+      });
+    
+  }, []);
+
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -31,8 +47,8 @@ const ProfileScreen = () => {
               <Title style={[styles.title, {
                 marginTop: 15,
                 marginBottom: 5,
-              }]}>John White</Title>
-              <Caption style={styles.caption}>@joeW</Caption>
+              }]}>{user.name}</Title>
+              <Caption style={styles.caption}>{user.national_id}</Caption>
             </View>
           </View>
         </View>
@@ -40,15 +56,15 @@ const ProfileScreen = () => {
         <View style={styles.userInfoSection}>
           <View style={styles.row}>
             <Icon name="email" color="#777777" size={20} />
-            <Text style={{ color: "#777777", marginLeft: 20 }}>john_white@gmail.com</Text>
+            <Text style={{ color: "#777777", marginLeft: 20 }}>{user.email}</Text>
           </View>
           <View style={styles.row}>
             <Icon name="map-marker-radius" color="#777777" size={20} />
-            <Text style={{ color: "#777777", marginLeft: 20 }}>No.17, Flower Road, Colombo 4</Text>
+            <Text style={{ color: "#777777", marginLeft: 20 }}>{user.address}</Text>
           </View>
           <View style={styles.row}>
             <Icon name="phone" color="#777777" size={20} />
-            <Text style={{ color: "#777777", marginLeft: 20 }}>+94 777722992</Text>
+            <Text style={{ color: "#777777", marginLeft: 20 }}>{user.phone_number}</Text>
           </View>
         </View>
 
@@ -63,16 +79,18 @@ const ProfileScreen = () => {
             ]}
             onPress={() => navigation.navigate('Reserved Books')} // Pass the infoType as a parameter
           >
-            <Text>2</Text>
-            <Text>Reserved Books</Text>
+         
+            <Text style={{color:"darkred", fontWeight:600}}>Reserved Books</Text>
+            <Icon name="bookmark-outline" color="#FF6347" size={25} />
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.infoBox}
             onPress={() => navigation.navigate('Borrowed Books')} // Pass the infoType as a parameter
           >
-            <Text>3</Text>
-            <Text>Borrowed Books</Text>
+           
+            <Text style={{color:"black", fontWeight:600}}>Borrowed Books</Text>
+            <Icon name="book-outline" color="#FF6347" size={25} />
           </TouchableOpacity>
         </View>
 
@@ -83,18 +101,6 @@ const ProfileScreen = () => {
               <Text style={styles.menuItemText}>Your Wishlist</Text>
             </View>
           </TouchableRipple>
-          {/* <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-            <Icon name="cart" color="#FF6347" size={25}/>
-            <Text style={styles.menuItemText}>Reserved Books</Text>
-          </View>
-        </TouchableRipple> */}
-          {/* <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-            <Icon name="book" color="#FF6347" size={25}/>
-            <Text style={styles.menuItemText}>Currently Borrowed Books</Text>
-          </View>
-        </TouchableRipple> */}
           <TouchableRipple onPress={() => { }}>
             <View style={styles.menuItem}>
               <Icon name="book" color="#FF6347" size={25} />

@@ -103,3 +103,26 @@ export async function cancelReservation(reservationId) {
   }
 }
 
+
+export async function getBarrowed() {
+  try {
+    const authToken = await getAuth();
+    const res = await fetch(`${config.url}/api/barrows/findone`, {
+      method: 'GET',
+      headers: {
+        'x-auth-token': authToken,
+      },
+    });
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error)
+    if (error.response.status !== 401) {
+      Alert.alert("Getting barrow Unseccessful");
+    }
+    throw error;
+  }
+}
+
+
+

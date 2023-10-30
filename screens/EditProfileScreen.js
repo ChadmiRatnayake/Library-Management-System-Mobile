@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -13,15 +13,35 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ImagePicker from 'react-native-image-picker';
+import { getUser } from "../services/User";
+import { updateUser } from "../services/User";
 
 const EditProfileScreen = () => {
 
     const navigation = useNavigation();
-  // Define state variables for user information
-  const [username, setUsername] = useState("John White");
-  const [email, setEmail] = useState("john_white@gmail.com");
-  const [address, setAddress] = useState("No.17, Flower Road, Colombo 4");
-  const [profileImage, setProfileImage] = useState(null);
+    const [profileImage, setProfileImage] = useState(null);
+    const [user, setUser] = React.useState([]);
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [address, setAddress] = useState("");
+    const [phone_number, setPhone_number] = useState("");
+    
+  useEffect(() => {
+    getUser()
+      .then((data) => {
+        setUser(data);
+        setUsername(data.name);
+        setEmail(data.email);
+        setAddress(data.address);
+        setPhone_number(data.phone_number);
+        
+      })
+      .catch((error) => {
+        setError(error);
+
+      });
+    
+  }, []);
 
 
 
@@ -56,11 +76,18 @@ const EditProfileScreen = () => {
       }
     });
   };
+ 
   
   // Function to save changes
-  const saveChanges = () => {
-    console.warn("Saved Changes");
-    navigation.navigate('ProfileScreen');
+  const saveChanges = async() => {
+
+    await updateUser({
+      name: username,
+      email: email,
+      address: address,
+      phone_number: phone_number,
+    });
+    navigation.goBack();
   };
 
   return (
@@ -87,7 +114,7 @@ const EditProfileScreen = () => {
         <TextInput
           style={styles.input}
           placeholder="Enter username"
-          value={username}
+          value={user.name}
           onChangeText={(text) => setUsername(text)}
         />
       </View>
@@ -97,7 +124,7 @@ const EditProfileScreen = () => {
         <TextInput
           style={styles.input}
           placeholder="Enter email"
-          value={email}
+          value={user.email}
           onChangeText={(text) => setEmail(text)}
         />
       </View>
@@ -107,15 +134,25 @@ const EditProfileScreen = () => {
         <Text style={styles.label}>Address</Text>
         <TextInput
           style={styles.input}
-          placeholder="Enter email"
-          value={address}
+          placeholder="Enter address"
+          value={user.address}
           onChangeText={(text) => setAddress(text)}
         />
       </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Phone Number</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter phone number"
+          value={user.phone_number}
+          onChangeText={(text) => setPhone_number(text)}
+        />
+      </View>
+
       </SafeAreaView>
 
       <View style={styles.button}>
-        <TouchableOpacity onPress={()=> navigation.goBack()} style={styles.saveButton}>
+        <TouchableOpacity onPress={saveChanges} style={styles.saveButton}>
           <Text style={styles.saveButtonText}>Save Changes</Text>
         </TouchableOpacity>
       </View>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { bookItems } from '../constants'; // Import your dummy data
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -6,42 +6,42 @@ import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import BookCard from '../components/BookCard';
-
+import { getBarrowed } from '../services/BooksController';
 
 
 const BorrowedBookScreen = () => {
   const navigation = useNavigation();
-  const [reservedList, setReservedList] = useState(bookItems.filter((book) => book.reserved));
+  const [barrowedList, setbarrowedList] = useState();
 
-  const handleRemoveFromReservedList = (bookId) => {
-    // Remove the book from the reservedList based on its ID
-    const updatedReservedList = reservedList.filter((book) => book.id !== bookId);
-    setReservedList(updatedReservedList);
-  };
+  useEffect(() => {
+      getBarrowed()
+      .then((data) => {
+        setbarrowedList(data);
+      })
+      .catch((error) => {
+        setError(error);
+      });
+      console.log(barrowedList);
+  }, []);
 
-  // Render each book item in the reservedList
+
+
+
+  // Render each book item in the barrowedList
   const renderItem = ({ item }) => (
     <BookCard
-        book={item}
+        book={item.book}
         showRemoveButton={false} // Pass true to show the remove button
-        onRemovePress={() => handleRemoveFromReservedList(item.id)}
+        onRemovePress={() => handleRemoveFrombarrowedList(item.id)}
     />
   );
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <TouchableOpacity
-          style={styles.goBackButton}
-          onPress={() => navigation.goBack()}
-        >
-          <FontAwesomeIcon icon={faArrowLeft} size={20} color="black" />
-      </TouchableOpacity>
-
-      <Text style={styles.header}>Reserved Books</Text> */}
       <FlatList
-        data={reservedList}
+        data={barrowedList}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.barrow_id}
       />
     </SafeAreaView>
   );

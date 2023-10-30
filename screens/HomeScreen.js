@@ -3,8 +3,8 @@ import { View, Text, Image, Dimensions, TextInput, TouchableOpacity, FlatList, P
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StatusBar } from 'expo-status-bar'
 import { BellIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
-import {themeColors} from '../theme';
-import {categoryData, bookItems} from '../constants';
+import { themeColors } from '../theme';
+import { categoryData, bookItems } from '../constants';
 import Carousel from 'react-native-snap-carousel';
 import Categories from '../components/Categories'
 //import BookCard from '../components/BookCard';
@@ -15,7 +15,7 @@ import { ScrollView } from 'react-native';
 
 
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 //const ios = Platform.OS == 'ios';
 
 export default function HomeScreen() {
@@ -23,6 +23,7 @@ export default function HomeScreen() {
   const [searchInput, setSearchInput] = useState('');
   const [filteredBooks, setFilteredBooks] = useState(bookItems);
   const [selectedCategory, setSelectedCategory] = useState('Category 1');
+  const [newdata, setNewdata] = useState([]);
 
   const navigation = useNavigation();
 
@@ -33,63 +34,65 @@ export default function HomeScreen() {
   }, [selectedCategory]);
 
 
-  
 
-  
+
+
+
+
 
   return (
-    <View className="flex-1 relative bg-white">
+    <View className="flex-1 relative bg-white" style={{paddingBottom:50}}>
       {/* <StatusBar /> */}
 
-      <Image 
-        source={require('../assets/images/bgBooks.jpg')} 
-        className="w-full absolute -top-5 opacity-3" 
-        style = {{height: 220}}
+      <Image
+        source={require('../assets/images/bgBooks.jpg')}
+        className="w-full absolute -top-5 opacity-3"
+        style={{ height: 220 }}
       />
 
       <SafeAreaView className="flex-1">
         {/* avatar icon */}
         {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 16 }}>
           {/* Add an empty view as a placeholder for spacing */}
-          <View />
-          {/* <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
+        <View />
+        {/* <TouchableOpacity onPress={() => navigation.navigate('UserProfile')}>
             <Image source={require('../assets/images/avatar.png')} style={{ width: 36, height: 36, borderRadius: 18 }} />
           </TouchableOpacity>
-        </View> */} 
+        </View> */}
 
 
         {/* search bar */}
-        <View className="mx-5 shadow" style={{marginTop: height*0.06}}>
+        <View className="mx-5 shadow" style={{ marginTop: height * 0.06 }}>
           <View className="flex-row items-center rounded-full p-1 bg-[#e6e6e6]">
 
             <TextInput placeholder='Search' className="p-4 flex-1 font-semibold text-gray-700" />
-            <TouchableOpacity 
-              className="rounded-full p-2" 
-              style={{backgroundColor: themeColors.bgLight}}>
+            <TouchableOpacity
+              className="rounded-full p-2"
+              style={{ backgroundColor: themeColors.bgLight }}>
               <MagnifyingGlassIcon size="25" strokeWidth={2} color="white" />
             </TouchableOpacity>
           </View>
         </View>
-        
+
 
 
         {/* categories */}
-        <View>  
-          <Categories activeCategory={selectedCategory} setActiveCategory={setSelectedCategory}/>
+        <View>
+          <Categories activeCategory={selectedCategory} setActiveCategory={setSelectedCategory} />
         </View>
         {/* <Books selectedCategory={selectedCategory} /> */}
 
         <ScrollView>
-        <BooksRecommended />
-        <BooksRecent />
-        
-        <BooksFavourites />
+          <BooksRecommended />
+          <BooksRecent />
+
+          <BooksFavourites />
         </ScrollView>
 
 
-        
-        
-      {/* <Books books={filteredBooks} />
+
+
+        {/* <Books books={filteredBooks} />
       <FlatList
         data={filteredBooks}
         keyExtractor={(item) => item.id}
@@ -101,10 +104,10 @@ export default function HomeScreen() {
         )}
         />*/}
 
-          
 
 
-    </SafeAreaView>
+
+      </SafeAreaView>
     </View>
   );
 }
@@ -113,6 +116,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+   
     backgroundColor: '#fff',
   },
   innerContainer: {

@@ -4,6 +4,7 @@ import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { fetchBooks } from "../services/BooksController";
+import { config } from "../configurations/config";
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -15,16 +16,62 @@ const BooksHorizontal = ({ title }) => {
     const [error, setError] = useState(null);
 
     const fetchBookData = () => {
-        fetchBooks()
-            .then((data) => {
-                setBookData(data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                setError(error);
-                setLoading(false);
-            });
+
+        if (title === "New Arrivals") {
+            getNewArrivals();
+        }
+        else if (title === "Trending") {
+            getPopular();
+        }
+        else {
+            fetchBooks()
+                .then((data) => {
+                    setBookData(data);
+                    setLoading(false);
+                })
+                .catch((error) => {
+                    setError(error);
+                    setLoading(false);
+                });
+        }
     };
+
+    async function getPopular() {
+        const result = await fetch(`${config.url}/popular`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+            }
+        );
+        const data = await result.json();
+   
+        setBookData(data)
+        setLoading(false);
+
+    }
+
+    async function getNewArrivals() {
+        const result = await fetch(`${config.url}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+            }
+        );
+        const data = await result.json();
+        setBookData(data)
+        console.log(data)
+        setLoading(false);
+    }
+
+
+
+
 
     useEffect(() => {
         if (isFocused) {
@@ -35,23 +82,22 @@ const BooksHorizontal = ({ title }) => {
 
 
     const renderBookItem = ({ item, index }) => {
-        if (index < 4) { 
-            console.log(item.url);
+        if (index < 4) {
             return (
-                
+
                 <TouchableOpacity
                     style={styles.bookItemHorizontal}
                     onPress={() => navigation.navigate('BookDetailsScreen', { book: item })}
                 >
                     <View style={styles.bookImageContainerHorizontal}>
-                        <Image source={{uri:item.url}} style={styles.bookImageHorizontal} />
+                        <Image source={{ uri: item.url || item.image }} style={styles.bookImageHorizontal} />
                     </View>
                     <Text style={styles.bookTitleHorizontal}>
-                        {item.title}
+                        {item.title || item.name}
                     </Text>
                 </TouchableOpacity>
             );
-        } else if (index === 4){ 
+        } else if (index === 4) {
             return (
                 <TouchableOpacity
                     style={styles.seeMoreContainer}
@@ -62,7 +108,7 @@ const BooksHorizontal = ({ title }) => {
             );
         }
     };
-    
+
 
 
     if (loading) {
