@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import BookCard from '../components/BookCard';
-
+import WishlistBooks from '../components/WishlistBooks';
 
 
 const WishlistScreen = () => {
@@ -21,7 +21,7 @@ const WishlistScreen = () => {
 
   // Render each book item in the wishlist
   const renderItem = ({ item }) => (
-    <BookCard
+    <WishlistBooks
         book={item}
         showRemoveButton={true} // Pass true to show the remove button
         onRemovePress={() => handleRemoveFromWishlist(item.id)}
@@ -101,3 +101,83 @@ const styles = StyleSheet.create({
 
 export default WishlistScreen;
 
+
+
+
+// import React, { useState, useEffect } from 'react';
+// import { FlatList, StyleSheet, Alert } from 'react-native';
+// import { SafeAreaView } from 'react-native-safe-area-context';
+// import { useNavigation } from '@react-navigation/native';
+// import BookCard from '../components/BookCard';
+// import { wishlist } from '../services/Wishlist';
+// import { removeFromWishlist } from '../services/Wishlist';
+
+// const WishlistScreen = () => {
+//   const navigation = useNavigation();
+//   const [wishlistItems, setWishlistItems] = useState();
+
+//   const handleRemoveFromWishlist = (bookId) => {
+//     Alert.alert(
+//       'Remove from Wishlist',
+//       'Are you sure you want to remove this book from your wishlist?',
+//       [
+//         {
+//           text: 'Cancel',
+//           style: 'cancel',
+//         },
+//         {
+//           text: 'OK',
+//           onPress: async () => {
+//             try {
+//               await removeFromWishlist(bookId);
+//               const updatedWishlistItems = wishlistItems.filter(
+//                 (book) => book.id !== bookId
+//               );
+//               setWishlistItems(updatedWishlistItems);
+//             } catch (e) {
+//               console.log(e);
+//             }
+//           },
+//         },
+//       ],
+//       { cancelable: false }
+//     );
+//   };
+
+//   useEffect(() => {
+//     // Call the fetchBooks function to fetch book data
+//     wishlist()
+//       .then((data) => {
+//         setWishlistItems(data);
+//         //console.log(data);
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//       });
+//   }, []);
+
+//   // Render each book item in the wishlist
+//   const renderItem = ({ book }) => (
+//     <BookCard
+//       book={book}
+//       showRemoveButton={true} // Pass true to show the remove button
+//       onRemovePress={() => handleRemoveFromWishlist(book.id)}
+//     />
+//   );
+
+//   return (
+//     <SafeAreaView style={styles.container}>
+//       <FlatList
+//         data={wishlistItems}
+//         renderItem={({ item }) => renderItem({ book: item })}
+//         keyExtractor={(item) => item.id}
+//       />
+//     </SafeAreaView>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   // Your style definitions here
+// });
+
+// export default WishlistScreen;

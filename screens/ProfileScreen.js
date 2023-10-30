@@ -1,5 +1,7 @@
-import React from 'react';
-import { View, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
+
+import React, {useState, useEffect} from 'react';
+import {View, SafeAreaView, StyleSheet, ScrollView} from 'react-native';
+
 import {
   Avatar,
   Title,
@@ -14,67 +16,89 @@ import { TouchableOpacity } from 'react-native';
 import { logout } from '../services/Authentication';
 import { getAuth } from '../services/Authentication';
 
+
 const ProfileScreen = () => {
   const navigation = useNavigation();
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState(''); // Initialize with an empty string
+
+  useEffect(() => {
+    // Fetch user data here, e.g., using the fetchUserData function
+    userDetails()
+      .then(([name, email]) => {
+        if (name, email) {
+          setName(name);
+          setEmail(email); // Update the email state
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching user data:', error);
+      });
+  }, []); // The empty dependency array ensures this effect runs only once
+
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <View style={styles.userInfoSection}>
-          <View style={{ flexDirection: 'row', marginTop: 25 }}>
-            <Avatar.Image
-              source={
-                require('../assets/images/profilePic.png')
-              }
-              size={80}
-            />
-            <View style={{ marginLeft: 20 }}>
-              <Title style={[styles.title, {
-                marginTop: 15,
-                marginBottom: 5,
-              }]}>John White</Title>
-              <Caption style={styles.caption}>@joeW</Caption>
-            </View>
+
+      <View style={styles.userInfoSection}>
+        <View style={{flexDirection: 'row', marginTop: 25}}>
+          <Avatar.Image 
+            source={
+              require('../assets/images/profilePic.png')
+            }
+            size={80}
+          />
+          <View style={{marginLeft: 20}}>
+            <Title style={[styles.title, {
+              marginTop:15,
+              marginBottom: 5,
+            }]}>Kiwi Bear</Title>
+            <Caption style={styles.caption}>{name}</Caption>
+
           </View>
         </View>
 
-        <View style={styles.userInfoSection}>
-          <View style={styles.row}>
-            <Icon name="email" color="#777777" size={20} />
-            <Text style={{ color: "#777777", marginLeft: 20 }}>john_white@gmail.com</Text>
-          </View>
-          <View style={styles.row}>
-            <Icon name="map-marker-radius" color="#777777" size={20} />
-            <Text style={{ color: "#777777", marginLeft: 20 }}>No.17, Flower Road, Colombo 4</Text>
-          </View>
-          <View style={styles.row}>
-            <Icon name="phone" color="#777777" size={20} />
-            <Text style={{ color: "#777777", marginLeft: 20 }}>+94 777722992</Text>
-          </View>
+      <View style={styles.userInfoSection}>
+        <View style={styles.row}>
+          <Icon name="email" color="#777777" size={20}/>
+          <Text style={{color:"#777777", marginLeft: 20}}>{email}</Text>
+        </View>
+        <View style={styles.row}>
+          <Icon name="map-marker-radius" color="#777777" size={20}/>
+          <Text style={{color:"#777777", marginLeft: 20}}>No.17, Flower Road, Colombo 4</Text>
+        </View>
+        <View style={styles.row}>
+          <Icon name="phone" color="#777777" size={20}/>
+          <Text style={{color:"#777777", marginLeft: 20}}>+94 777722992</Text>
+
         </View>
 
-        <View style={styles.infoBoxWrapper}>
-          <TouchableOpacity
-            style={[
-              styles.infoBox,
-              {
-                borderRightColor: '#dddddd',
-                borderRightWidth: 1,
-              },
-            ]}
-            onPress={() => navigation.navigate('Reserved Books')} // Pass the infoType as a parameter
-          >
-            <Text>2</Text>
-            <Text>Reserved Books</Text>
-          </TouchableOpacity>
+      <View style={styles.infoBoxWrapper}>
+      <TouchableOpacity
+        style={[
+          styles.infoBox,
+          {
+            borderRightColor: '#dddddd',
+            borderRightWidth: 1,
+          },
+        ]}
+        onPress={() => navigation.navigate('Reserved Books')} // Pass the infoType as a parameter
+      >
+        {/* <Text>2</Text> */}
+        <Text>Reserved Books</Text>
+      </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.infoBox}
-            onPress={() => navigation.navigate('Borrowed Books')} // Pass the infoType as a parameter
-          >
-            <Text>3</Text>
-            <Text>Borrowed Books</Text>
-          </TouchableOpacity>
-        </View>
+      <TouchableOpacity
+        style={styles.infoBox}
+        onPress={() => navigation.navigate('Borrowed Books')} // Pass the infoType as a parameter
+      >
+        {/* <Text>3</Text> */}
+        <Text>Borrowed Books</Text>
+      </TouchableOpacity>
+    </View>
+
 
         <View style={styles.menuWrapper}>
           <TouchableRipple onPress={() => navigation.navigate('Wishlist')}>
@@ -95,31 +119,29 @@ const ProfileScreen = () => {
             <Text style={styles.menuItemText}>Currently Borrowed Books</Text>
           </View>
         </TouchableRipple> */}
-          <TouchableRipple onPress={() => { }}>
-            <View style={styles.menuItem}>
-              <Icon name="book" color="#FF6347" size={25} />
-              <Text style={styles.menuItemText}>Borrowed Books History</Text>
-            </View>
-          </TouchableRipple>
-          <TouchableRipple onPress={() => { }}>
-            <View style={styles.menuItem}>
-              <Icon name="credit-card" color="#FF6347" size={25} />
-              <Text style={styles.menuItemText}>Overdue Charges</Text>
-            </View>
-          </TouchableRipple>
-          <TouchableRipple onPress={() => {
-            logout()
-            navigation.navigate('Welcome')
-          }}>
-            <View style={styles.menuItem}>
-              <Icon name="account" color="#FF6347" size={25} />
-              <Text style={styles.menuItemText}>Logout</Text>
-            </View>
-          </TouchableRipple>
+        {/* <TouchableRipple onPress={() => {}}>
+          <View style={styles.menuItem}>
+            <Icon name="book" color="#FF6347" size={25}/>
+            <Text style={styles.menuItemText}>Borrowed Books History</Text>
+          </View>
+        </TouchableRipple> */}
+        <TouchableRipple onPress={()=> navigation.navigate('Overdue Charges')}>
+          <View style={styles.menuItem}>
+            <Icon name="credit-card" color="#FF6347" size={25}/>
+            <Text style={styles.menuItemText}>Overdue Charges</Text>
+          </View>
+        </TouchableRipple>
+        <TouchableRipple onPress={() => navigation.navigate('Welcome')}>
+          <View style={styles.menuItem}>
+            <Icon name="account" color="#FF6347" size={25}/>
+            <Text style={styles.menuItemText}>Logout</Text>
+          </View>
+        </TouchableRipple>
+        
+        
+        
+      </View>
 
-
-
-        </View>
       </ScrollView>
     </SafeAreaView>
   );

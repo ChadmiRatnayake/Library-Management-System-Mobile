@@ -4,7 +4,7 @@ import { bookItems } from '../constants';
 import { SafeAreaView } from 'react-native';
 import BookCard from '../components/BookCard';
 import DisplayBooks from '../components/DisplayBooks';
-import { fetchBooks } from '../services/BooksController';
+import { fetchBooks } from '../services/BooksServices';
 import { set } from 'react-native-reanimated';
 
 
@@ -16,9 +16,17 @@ function SearchScreen() {
 
   const handleSearch = (text) => {
     setSearchTerm(text);
-    const filteredBooks = bookData.filter(book =>
-      book.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // const filteredBooks = bookData.filter(book =>
+    //   book.title.toLowerCase().includes(text.toLowerCase())
+    // );
+
+    const filteredBooks = bookData.filter((book, index, self) => {
+      return (
+        book.title.toLowerCase().includes(text.toLowerCase()) &&
+        index === self.findIndex((b) => b.title === book.title)
+      );
+    });
+
     // Update the search results state
     setSearchResults(filteredBooks);
   };
@@ -43,10 +51,10 @@ function SearchScreen() {
           <TextInput
             style={styles.input}
             onChangeText={text => {handleSearch(text)}}
-            value={setSearchTerm}
+            value={searchTerm}
             placeholder="Search by title"
           />
-          <Button title="Search" onPress={handleSearch} />
+          <Button title="Search" onPress={() => handleSearch(searchTerm)} />
 
           
         </View>
@@ -69,6 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     alignItems: 'center',
+    minHeight: 20,
   },
   header: {
     fontSize: 24,

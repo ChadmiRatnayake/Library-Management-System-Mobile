@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image, StyleSheet, Dimensions, FlatList }
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { fetchBooks } from "../services/BooksController";
+import { fetchBooks } from "../services/BooksServices";
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -55,7 +55,7 @@ const BooksHorizontal = ({ title }) => {
             return (
                 <TouchableOpacity
                     style={styles.seeMoreContainer}
-                    onPress={() => navigation.navigate('Recents')}>
+                    onPress={() => navigation.navigate('Trending')}>
                     <Text style={styles.seeMoreText}>See More</Text>
                     <FontAwesomeIcon icon={faArrowRight} size={20} color="black" />
                 </TouchableOpacity>

@@ -15,16 +15,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ImagePicker from 'react-native-image-picker';
 
 const EditProfileScreen = () => {
-
-    const navigation = useNavigation();
-  // Define state variables for user information
+  const navigation = useNavigation();
   const [username, setUsername] = useState("John White");
   const [email, setEmail] = useState("john_white@gmail.com");
   const [address, setAddress] = useState("No.17, Flower Road, Colombo 4");
   const [profileImage, setProfileImage] = useState(null);
-
-
-
 
   
 
@@ -64,67 +59,65 @@ const EditProfileScreen = () => {
   };
 
   return (
-    
     <View style={styles.container}>
-        <SafeAreaView>
-      {/* Profile Picture */}
-      <View style={styles.profileImageContainer}>
-  <TouchableOpacity onPress={selectProfileImage}>
-    <View style={styles.profileImageWrapper}>
-      <Image
-        source={profileImage ? { uri: profileImage.uri } : require('../assets/images/profilePic.png')}
-        style={styles.profileImage}
-      />
-      
-    </View>
-    <Icon onPress={selectProfileImage} name="edit" size={20} color="#FFFFFF" style={styles.editIcon} />
-  </TouchableOpacity>
-</View>
+      <SafeAreaView>
+        {/* Profile Picture */}
+        <View style={styles.profileImageContainer}>
+          <TouchableOpacity onPress={selectProfileImage}>
+            <View style={styles.profileImageWrapper}>
+              <Image
+                source={
+                  profileImage
+                    ? { uri: profileImage.uri }
+                    : require("../assets/images/profilePic.png")
+                }
+                style={styles.profileImage}
+              />
+            </View>
+            <Icon
+              onPress={selectProfileImage}
+              name="edit"
+              size={20}
+              color="#FFFFFF"
+              style={styles.editIcon}
+            />
+          </TouchableOpacity>
+        </View>
 
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Username</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter username"
+            onChangeText={(text) => setUsername(text)}
+          />
+        </View>
 
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Username</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter username"
-          value={username}
-          onChangeText={(text) => setUsername(text)}
-        />
-      </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>E-mail</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter email"
+            onChangeText={(text) => setEmail(text)}
+          />
+        </View>
 
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>E-mail</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter email"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-        />
-      </View>
-      
-
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Address</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter email"
-          value={address}
-          onChangeText={(text) => setAddress(text)}
-        />
-      </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Address</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter address"
+            onChangeText={(text) => setAddress(text)}
+          />
+        </View>
       </SafeAreaView>
 
       <View style={styles.button}>
-        <TouchableOpacity onPress={()=> navigation.goBack()} style={styles.saveButton}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.saveButton}>
           <Text style={styles.saveButtonText}>Save Changes</Text>
         </TouchableOpacity>
       </View>
-
-      
-
-      
     </View>
-    
   );
 };
 

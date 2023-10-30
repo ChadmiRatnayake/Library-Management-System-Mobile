@@ -80,7 +80,7 @@ export default function HomeScreen() {
         {/* <Books selectedCategory={selectedCategory} /> */}
 
         <ScrollView>
-        <BooksRecommended />
+        {/* <BooksRecommended /> */}
         <BooksRecent />
         
         <BooksFavourites />
@@ -99,9 +99,7 @@ export default function HomeScreen() {
             <Text>{item.title}</Text>
           </View>
         )}
-        />*/}
-
-          
+        />*/} 
 
 
     </SafeAreaView>

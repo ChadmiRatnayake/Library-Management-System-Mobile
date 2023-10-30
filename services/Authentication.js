@@ -28,6 +28,7 @@ const authenticateUser = async () => {
             },
         });
 
+
         if (response.ok) {
             return true;
         } else {
@@ -50,4 +51,5 @@ const logout = async () => {
 }
 
 export { SetAuth, getAuth, authenticateUser , logout};
+
 

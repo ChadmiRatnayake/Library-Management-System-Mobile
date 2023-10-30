@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { Alert, View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { faArrowLeft, faCheck, faTimes  } from '@fortawesome/free-solid-svg-icons';
-import {reserve} from '../services/BooksController';
+import {reserve} from '../services/BooksServices';
 
 export default function BookDetailsScreen({ route }) {
   const navigation = useNavigation();
@@ -25,11 +25,32 @@ export default function BookDetailsScreen({ route }) {
  
   };
 
-  const handleReserve = async() => {
-        console.log(book);
-        setBookReserved(true)
-        await reserve(book.bookid);
- };
+  const handleReserve = () => {
+    Alert.alert(
+      'Confirm Reservation',
+      'Are you sure you want to reserve this book?',
+      [
+        {
+          text: 'No',
+          style: 'cancel',
+        },
+        {
+          text: 'Yes',
+          onPress: async () => {
+            try {
+              console.log(book);
+              setBookReserved(true);
+              await reserve(book.bookid);
+            } catch (error) {
+              console.error(error);
+            }
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
 
   return (
     <SafeAreaView style={styles.safeAreaView}>

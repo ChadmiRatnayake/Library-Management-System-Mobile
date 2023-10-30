@@ -1,3 +1,4 @@
 export const config = {
-    url: 'http://10.10.7.27:8080'
+    url: 'http://192.168.8.184:8080'
+    //url:'https://lbms-server.onrender.com'
 };
